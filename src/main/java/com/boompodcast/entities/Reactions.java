@@ -25,22 +25,22 @@ public class Reactions {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getPodcast_id() {
+	public Podcasts getPodcast_id() {
 		return this.podcast_id;
 	}
-	public void setPodcast_id(int podcast_id) {
+	public void setPodcast_id(Podcasts podcast_id) {
 		this.podcast_id = podcast_id;
 	}
-	public int getEpisode_id() {
+	public Episodes getEpisode_id() {
 		return episode_id;
 	}
-	public void setEpisode_id(int episode_id) {
+	public void setEpisode_id(Episodes episode_id) {
 		this.episode_id = episode_id;
 	}
-	public int getUser_id() {
+	public Users getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(Users user_id) {
 		this.user_id = user_id;
 	}
 	public int getValue() {

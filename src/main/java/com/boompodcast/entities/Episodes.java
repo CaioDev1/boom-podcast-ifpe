@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-public class Episodies implements Serializable{
+public class Episodes implements Serializable{
 
 	LocalDate localDate = LocalDate.now();
 	
@@ -30,16 +30,16 @@ public class Episodies implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "podcasts_id")
-	private Episodies episodies;
+	private Episodes episodies;
 
 
-	public Episodies() {
+	public Episodes() {
 		
 	}
 
 
-	public Episodies(LocalDate localDate, Integer id, String title, OffsetDateTime created_at, Integer duration,
-			Integer podcasts_id, String file_path, Episodies episodies) {
+	public Episodes(LocalDate localDate, Integer id, String title, OffsetDateTime created_at, Integer duration,
+			Integer podcasts_id, String file_path, Episodes episodies) {
 		super();
 		this.localDate = localDate;
 		this.id = id;
@@ -122,12 +122,12 @@ public class Episodies implements Serializable{
 	}
 
 
-	public Episodies getEpisodies() {
+	public Episodes getEpisodies() {
 		return episodies;
 	}
 
 
-	public void setEpisodies(Episodies episodies) {
+	public void setEpisodies(Episodes episodies) {
 		this.episodies = episodies;
 	}
 
@@ -149,7 +149,7 @@ public class Episodies implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Episodies other = (Episodies) obj;
+		Episodes other = (Episodes) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
