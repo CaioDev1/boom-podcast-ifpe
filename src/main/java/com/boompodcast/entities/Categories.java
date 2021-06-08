@@ -1,4 +1,4 @@
-package com.boompodcast.entity;
+package com.boompodcast.entities;
 
 import java.util.ArrayList;
 import java.util.List;
