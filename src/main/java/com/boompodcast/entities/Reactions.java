@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 public class Reactions {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@ManyToOne
-	private Podcast podcast_id;
+	private Podcasts podcast_id;
 	@ManyToOne
-	private Episode episode_id;
+	private Episodes episode_id;
 	@ManyToOne
-	private User user_id;
-	private int value;
+	private Users user_id;
+	private Integer value;
 	
 	public int getId() {
 		return id;

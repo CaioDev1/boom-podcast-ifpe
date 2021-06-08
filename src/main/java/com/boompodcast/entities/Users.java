@@ -6,14 +6,14 @@ import javax.persistence.ManyToOne;
 
 import boomPodcast.ifpe.pp2.user.Level;
 @Entity
-public class User {
+public class Users {
 	@Id
 	private Integer id;
 	private	String username;
 	private	String email;
 	private	String password;
 	@ManyToOne
-	private Level level;
+	private Levels level_id;
 	
 	public Integer getId() {
 		return id;
@@ -38,4 +38,5 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
 }

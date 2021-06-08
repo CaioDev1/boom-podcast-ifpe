@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Levels {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String color;
 	private String description;
 	
