@@ -16,7 +16,7 @@ body {
 
     min-width: 100vw;
 
-    background-color: gray;
+    background-color: rgb(99, 99, 99);
 
     height: 100px;
 
@@ -52,6 +52,8 @@ body {
 .page-container header svg {
     height: 40px;
     width: 40px;
+
+    fill: white;
 }
 
 .custom-player-buttons {
