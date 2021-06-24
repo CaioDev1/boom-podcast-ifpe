@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Register Template</title>
+  <title>Cadastro</title>
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -29,17 +29,17 @@
             <form action="/cadastro" method="POST">
               <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
+                <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
               </div>
               <div class="form-group mb-4">
                 <label for="password">Senha</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Sua senha">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Sua senha" required>
               </div>
               <div class="form-group mb-4">
                 <label for="password">Repita a senha</label>
-                <input type="password" name="password_confirm" id="password-confirm" class="form-control" placeholder="Confirme a senha">
+                <input type="password" name="password_confirm" id="password-confirm" class="form-control" placeholder="Confirme a senha" required>
               </div>
-              <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Cadastrar">
+              <button id="login" class="btn btn-block login-btn" type="submit">Cadastrar-se</button>
             </form>
            <!--  <a href="#!" class="forgot-password-link">Forgot password?</a> -->
             <p class="login-wrapper-footer-text">Já tem uma conta? <a href="/entrar" class="text-reset">Entre aqui!</a></p>
