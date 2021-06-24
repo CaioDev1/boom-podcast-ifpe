@@ -13,10 +13,8 @@ import javax.persistence.ManyToOne;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import boomPodcast.ifpe.pp2.entidades.Role;
-
 @Entity
-public class Users implements UserDetails{
+public class Users implements UserDetails {
 	@Id
 	private Integer id;
 	private	String username;
@@ -41,9 +39,9 @@ public class Users implements UserDetails{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsername() {
+	/*public String getUsername() {
 		return username;
-	}
+	}*/
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -53,9 +51,9 @@ public class Users implements UserDetails{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
+	/*public String getPassword() {
 		return password;
-	}
+	}*/
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -83,7 +81,7 @@ public class Users implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.email;
+		return this.username;
 	}
 	
 	@Override

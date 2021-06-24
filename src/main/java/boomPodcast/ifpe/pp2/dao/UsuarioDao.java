@@ -1,14 +1,9 @@
 package boomPodcast.ifpe.pp2.dao;
 
-import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.boompodcast.entities.Users;
 
-
-public interface UsuarioDao extends JpaRepository<User, Integer>{
-
-
-	User findByEmail(String email);
-
-
+public interface UsuarioDao extends JpaRepository<Users, Integer>{
+	Users findByEmail(String email);
 }

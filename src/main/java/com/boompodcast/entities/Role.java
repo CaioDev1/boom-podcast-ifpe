@@ -10,13 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class Role implements GrantedAuthority{
-
-
 	@Id
 	private String nomeRole;
 
 	@ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuarios;
+    private List<Users> usuarios;
 	
 	public String getNomeRole() {
 		return nomeRole;
@@ -26,11 +24,11 @@ public class Role implements GrantedAuthority{
 		this.nomeRole = nomeRole;
 	}
 	
-	public List<Usuario> getUsuarios() {
+	public List<Users> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(List<Users> usuarios) {
 		this.usuarios = usuarios;
 	}
 
