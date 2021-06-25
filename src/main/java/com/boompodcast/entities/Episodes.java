@@ -26,12 +26,6 @@ public class Episodes implements Serializable{
 	private Integer duration;
 	private Integer podcasts_id;
 	private String file_path;
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "podcasts_id")
-	private Episodes episodies;
-
 
 	public Episodes() {
 		
@@ -39,7 +33,7 @@ public class Episodes implements Serializable{
 
 
 	public Episodes(LocalDate localDate, Integer id, String title, OffsetDateTime created_at, Integer duration,
-			Integer podcasts_id, String file_path, Episodes episodies) {
+			Integer podcasts_id, String file_path) {
 		super();
 		this.localDate = localDate;
 		this.id = id;
@@ -48,7 +42,6 @@ public class Episodes implements Serializable{
 		this.duration = duration;
 		this.podcasts_id = podcasts_id;
 		this.file_path = file_path;
-		this.episodies = episodies;
 	}
 
 
@@ -120,17 +113,6 @@ public class Episodes implements Serializable{
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
 	}
-
-
-	public Episodes getEpisodies() {
-		return episodies;
-	}
-
-
-	public void setEpisodies(Episodes episodies) {
-		this.episodies = episodies;
-	}
-
 
 	@Override
 	public int hashCode() {

@@ -8,20 +8,17 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Podcasts {
-	
-	
-	
 	@Id
 	private Integer id; 
 	private String name;	
 	private String description;
 	private String cover_path;
-	
 	@ManyToOne
 	@JoinColumn(name = "categories_id")
 	private Categories categories;
 	@ManyToOne
-	private Users user;
+	private Users user_id;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -52,11 +49,11 @@ public class Podcasts {
 	public void setCategoria(Categories categoria) {
 		this.categories = categoria;
 	}
-	public Users getUsers() {
-		return user;
+	public Users getUserId() {
+		return user_id;
 	}
-	public void setUser(Users user) {
-		this.user = user;
+	public void setUserId(Users user) {
+		this.user_id = user;
 	}
 	
 	

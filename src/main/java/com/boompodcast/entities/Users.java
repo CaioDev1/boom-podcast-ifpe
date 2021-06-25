@@ -22,7 +22,6 @@ public class Users implements UserDetails {
 	private	String password;
 	@ManyToOne
 	private Levels level_id;
-	
 	@ManyToMany
 	@JoinTable( 
 	        name = "usuarios_roles", 
