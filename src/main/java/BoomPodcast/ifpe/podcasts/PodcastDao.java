@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.podcast;
+package BoomPodcast.ifpe.podcasts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.podcast;
+package BoomPodcast.ifpe.podcasts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,7 @@ public class PodCastController {
 	private PodcastDao podcastDao;
 	
 	@PostMapping("/salvarpodcast")
-	public String salvarPodcast(Podcast podcast) {
+	public String salvarPodcast(Podcasts podcast) {
 		this.podcastDao.save(podcast);
 		System.out.println(podcast);
 		return "home";

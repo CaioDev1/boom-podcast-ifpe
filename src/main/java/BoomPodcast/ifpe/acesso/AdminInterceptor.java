@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.acesso;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

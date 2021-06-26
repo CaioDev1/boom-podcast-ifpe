@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.acesso;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import BoomPodcast.ifpe.usuarios.Users;
+import BoomPodcast.ifpe.usuarios.UsersDAO;
+
 @Controller
 public class AcessoController {
 
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	private UsersDAO usuarioDAO;
 	
 	@GetMapping("/")
 	public String index() {
@@ -35,7 +38,7 @@ public class AcessoController {
 	@PostMapping("/login")
 	public String efetuarLogin(String login, String senha, HttpSession session, RedirectAttributes ra) {
 		// Buscar se existe um usuario com o login e senha informados
-		Usuario usuarioLogado = this.usuarioDAO.findByLoginAndSenha(login, senha);
+		Users usuarioLogado = this.usuarioDAO.findByLoginAndSenha(login, senha);
 		if (usuarioLogado == null) {
 			ra.addFlashAttribute("mensagem", "Login/senha inválidos");
 			return "redirect:/";

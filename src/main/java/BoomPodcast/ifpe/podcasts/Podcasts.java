@@ -1,11 +1,12 @@
-package BoomPodcast.ifpe.pp2.podcast;
+package BoomPodcast.ifpe.podcasts;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 
-import BoomPodcast.ifpe.pp2.acesso.Usuario;
+import BoomPodcast.ifpe.categorias.Categories;
+import BoomPodcast.ifpe.usuarios.Users;
 @Entity
 public class Podcasts {
 	@Id
@@ -14,9 +15,9 @@ public class Podcasts {
 	private String description;
 	private String cover_path;
 	@ManyToOne
-	private Categorias categories;
+	private Categories categories;
 	@ManyToOne
-	private Usuario user;
+	private Users user;
 
 	public Integer getId() {
 		return id;
@@ -42,16 +43,16 @@ public class Podcasts {
 	public void setCover_path(String cover_path) {
 		this.cover_path = cover_path;
 	}
-	public Categorias getCategories() {
+	public Categories getCategories() {
 		return categories;
 	}
-	public void setCategories(Categorias categories) {
+	public void setCategories(Categories categories) {
 		this.categories = categories;
 	}
-	public Usuario getUser() {
+	public Users getUser() {
 		return user;
 	}
-	public void setUser(Usuario user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 	

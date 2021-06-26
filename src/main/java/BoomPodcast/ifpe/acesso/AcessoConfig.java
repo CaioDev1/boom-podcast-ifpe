@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.acesso;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

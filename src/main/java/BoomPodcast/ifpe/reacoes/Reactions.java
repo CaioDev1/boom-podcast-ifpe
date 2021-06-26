@@ -1,3 +1,15 @@
+package BoomPodcast.ifpe.reacoes;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import BoomPodcast.ifpe.episodios.Episodes;
+import BoomPodcast.ifpe.podcasts.Podcasts;
+import BoomPodcast.ifpe.usuarios.Users;
+
 @Entity
 public class Reactions {
 	@Id

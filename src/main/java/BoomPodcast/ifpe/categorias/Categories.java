@@ -1,5 +1,14 @@
+package BoomPodcast.ifpe.categorias;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
-public class Categories implements Serializable{
+public class Categories implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -10,13 +19,12 @@ public class Categories implements Serializable{
 	public Categories() {
 	}
 
-	public Categories(Integer id, String name, int number_podcasts, int total_views, List<Podcasts> podcasts) {
+	public Categories(Integer id, String name, int number_podcasts, int total_views) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.number_podcasts = number_podcasts;
 		this.total_views = total_views;
-		this.podcasts = podcasts;
 	}
 
 	public Integer getId() {

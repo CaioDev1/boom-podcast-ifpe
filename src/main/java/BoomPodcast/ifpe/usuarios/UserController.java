@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
 	
 	@Autowired
-	private UsuarioDAO userDAO;
+	private UsersDAO userDAO;
 	
-	private List<Usuario> listaUser = new ArrayList<Usuario>();
+	private List<Users> listaUser = new ArrayList<Users>();
 	
 	@PostMapping("/salvarLogin")
-	public String cadastrarCategoriaObj(Usuario user, RedirectAttributes ra) {
+	public String cadastrarCategoriaObj(Users user, RedirectAttributes ra) {
 		// Validacoes antes de chamar o DAO
 		/*if (user.getUsername().trim().isEmpty()) {
 			ra.addFlashAttribute("mensagem", "nome nao pode ficar em branco");

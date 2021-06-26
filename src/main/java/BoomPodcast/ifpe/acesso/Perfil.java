@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.acesso;
 
 public enum Perfil {
 	ADMIN, USER

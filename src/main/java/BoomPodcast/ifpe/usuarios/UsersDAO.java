@@ -1,10 +1,10 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.usuarios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // Data Access Object 
-public interface UsuarioDAO extends JpaRepository<Users, Integer>{
+public interface UsersDAO extends JpaRepository<Users, Integer>{
 
 	// select * from usuario where login = ... and senha = ...
-	public Usuario findByLoginAndSenha(String login, String senha);
+	public Users findByLoginAndSenha(String login, String senha);
 }

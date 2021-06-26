@@ -1,4 +1,4 @@
-package BoomPodcast.ifpe.pp2.acesso;
+package BoomPodcast.ifpe.usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import BoomPodcast.ifpe.acesso.Perfil;
 
 @Entity
 public class Users {
