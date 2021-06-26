@@ -33,6 +33,11 @@ public class AcessoController {
 	public String usuario() {
 		return "profile";
 	}
+
+	@GetMapping("/adm/podcast")
+	public String podcast() {
+		return "podcast";
+	}
 		
 	@PostMapping("/login")
 	public String efetuarLogin(String email, String password, HttpSession session, RedirectAttributes ra) {

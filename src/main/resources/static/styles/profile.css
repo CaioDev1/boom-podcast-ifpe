@@ -80,7 +80,7 @@ main {
 
                 background-color: yellow;
 
-                margin: 00px 10px 10px 0;
+                margin: 0 10px 10px 0;
             }
 
                 .user-podcast-item img {
@@ -110,6 +110,34 @@ main {
 }
 
 
+#add-episode-container {
+    width: 100vw;
+    height: 100vh;
+
+    top: 0;
+
+    background-color: rgba(0, 0, 0, 0.212);
+    backdrop-filter: blur(5px);
+    
+    opacity: 0;
+    display: none;
+
+    position: fixed;
+}
+
+    #add-episode-container form {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #add-episode-container.active {
+        opacity: 1;
+        display: initial;
+
+        z-index: 2;
+    }
+
+
 
 
 /* FORM CSS */
@@ -119,7 +147,7 @@ main {
 }
 
 .registration-form form{
-    background-color: /* rgb(99, 99, 99) */ rgb(221, 221, 53);
+    
     max-width: 600px;
     min-width: 400px;
     margin: auto;
