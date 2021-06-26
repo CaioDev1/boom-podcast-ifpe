@@ -1,6 +1,7 @@
-package com.boompodcast.entities;
+package com.boompodcast.episodios;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,14 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
+
+import com.boompodcast.podcasts.Podcasts;
 
 @Entity
-public class Episodes implements Serializable{
-
+public class Episodes {
 	LocalDate localDate = LocalDate.now();
 	
 	@Id
@@ -24,32 +22,10 @@ public class Episodes implements Serializable{
 	private String title;
 	private OffsetDateTime created_at;
 	private Integer duration;
-	private Integer podcasts_id;
+    @ManyToOne
+    @JoinColumn(name = "podcast_id")
+	private Podcasts podcast;
 	private String file_path;
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "podcasts_id")
-	private Episodes episodies;
-
-
-	public Episodes() {
-		
-	}
-
-
-	public Episodes(LocalDate localDate, Integer id, String title, OffsetDateTime created_at, Integer duration,
-			Integer podcasts_id, String file_path, Episodes episodies) {
-		super();
-		this.localDate = localDate;
-		this.id = id;
-		this.title = title;
-		this.created_at = created_at;
-		this.duration = duration;
-		this.podcasts_id = podcasts_id;
-		this.file_path = file_path;
-		this.episodies = episodies;
-	}
 
 
 	public LocalDate getLocalDate() {
@@ -102,13 +78,13 @@ public class Episodes implements Serializable{
 	}
 
 
-	public Integer getPodcasts_id() {
-		return podcasts_id;
+	public Podcasts getPodcast() {
+		return podcast;
 	}
 
 
-	public void setPodcasts_id(Integer podcasts_id) {
-		this.podcasts_id = podcasts_id;
+	public void setPodcast(Podcasts podcast) {
+		this.podcast = podcast;
 	}
 
 
@@ -120,26 +96,6 @@ public class Episodes implements Serializable{
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
 	}
-
-
-	public Episodes getEpisodies() {
-		return episodies;
-	}
-
-
-	public void setEpisodies(Episodes episodies) {
-		this.episodies = episodies;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -157,6 +113,4 @@ public class Episodes implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

@@ -1,4 +1,4 @@
-package com.boompodcast.entities;
+package com.boompodcast.levels;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,8 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Levels {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String color;
 	private String description;
