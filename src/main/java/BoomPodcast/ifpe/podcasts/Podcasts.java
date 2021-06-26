@@ -7,15 +7,17 @@ import javax.persistence.ManyToOne;
 
 import BoomPodcast.ifpe.pp2.acesso.Usuario;
 @Entity
-public class Podcast {
+public class Podcasts {
 	@Id
 	private Integer id; 
 	private String name;	
 	private String description;
 	private String cover_path;
+	@ManyToOne
 	private Categorias categories;
 	@ManyToOne
 	private Usuario user;
+
 	public Integer getId() {
 		return id;
 	}

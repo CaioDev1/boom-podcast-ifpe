@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-public class PerfilController {
+public class UserController {
 	
 	@Autowired
 	private UsuarioDAO userDAO;

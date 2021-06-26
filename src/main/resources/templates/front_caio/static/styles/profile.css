@@ -1,0 +1,168 @@
+.page-container {
+    padding-bottom: 80px;
+}
+
+main {
+    display: flex;
+
+    padding: 0 5%;
+
+    width: 100%;
+}
+
+    #user-container {
+        margin-right: auto;
+    }
+
+        #user-field {
+            display: flex;
+            flex-wrap: wrap;
+
+            text-align: center;
+        }
+        
+        #user-photo {
+            display: flex;
+            position: relative;
+        }
+
+            #user-photo svg{
+                height: 300px;
+                width: 300px;
+
+                fill: white;
+            }
+
+            #user-photo span {
+                position: absolute;
+                left: 15%;
+                top: -30%;
+
+                font-size: 20rem;
+                font-weight: bold;
+                color: white;
+
+                opacity: 0.2;
+            }
+
+            #user-info {
+                background-color: darkgray;
+                border-radius: 10px;
+
+                height: fit-content;
+
+                padding: 10px 20px;
+            }
+
+            #user-info > * {
+                color: white;
+
+                font-size: 2rem;
+            }
+
+        #user-podcasts {
+            padding-top: 20px;
+        }
+
+        #user-podcasts-list {
+            display: flex;
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+            .user-podcast-item {
+                height: 150px;
+                width: 150px;
+
+                border-radius: 10px;
+                overflow: hidden;
+
+                background-color: yellow;
+
+                margin: 00px 10px 10px 0;
+            }
+
+                .user-podcast-item img {
+                    height: 100%;
+                    width: 100%;
+                }
+
+            .user-podcast-item:last-child {
+                margin-right: 0;
+            }
+
+@media screen and (max-width: 900px) {
+    main, #user-field {
+        flex-direction: column;
+    }
+
+    #user-photo {
+        justify-content: center;
+    }
+        #user-photo span {
+            left: 27%;
+        }
+
+    #user-container {
+        margin: 0 auto;
+    }
+}
+
+
+
+
+/* FORM CSS */
+
+.registration-form{
+    padding: 50px 0;
+}
+
+.registration-form form{
+    background-color: /* rgb(99, 99, 99) */ rgb(221, 221, 53);
+    max-width: 600px;
+    min-width: 400px;
+    margin: auto;
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.registration-form .form-icon{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 50px;
+    line-height: 100px;
+}
+
+.registration-form .item{
+    border-radius: 20px;
+    margin-bottom: 25px;
+    padding: 10px 20px;
+}
+
+.registration-form .create-account{
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: yellow;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .registration-form form{
+        padding: 50px 20px;
+    }
+
+    .registration-form .form-icon{
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+        line-height: 70px;
+    }
+}

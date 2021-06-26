@@ -51,6 +51,7 @@ public class AcessoController {
 		return "redirect:/";
 	}
 	
+	// trocar para um redirect para o pag de login quando o acesso for negado
 	@GetMapping("/acessoNegado")
 	public String acessoNegado() {
 		return "acesso_negado";

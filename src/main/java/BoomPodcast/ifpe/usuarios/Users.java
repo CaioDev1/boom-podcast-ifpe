@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Usuario {
+public class Users {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer codigo;
+	private Integer id;
 	@Column(length = 100)
 	private String nome;
 	@Column(length = 50)
@@ -21,12 +21,13 @@ public class Usuario {
 	private String senha;
 	@Enumerated(EnumType.STRING)
 	private Perfil perfil;
+	// adicionar atributo level @manytoone
 	
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getId() {
+		return id;
 	}
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
