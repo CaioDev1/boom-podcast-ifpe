@@ -17,7 +17,7 @@ public class UserController {
 	
 	private List<Users> listaUser = new ArrayList<Users>();
 	
-	@PostMapping("/salvarLogin")
+	@PostMapping("/cadastrar")
 	public String cadastrarCategoriaObj(Users user, RedirectAttributes ra) {
 		// Validacoes antes de chamar o DAO
 		/*if (user.getUsername().trim().isEmpty()) {

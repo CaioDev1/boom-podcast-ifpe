@@ -28,7 +28,7 @@ public class Users {
 	private Access access;
 	@ManyToOne
 	@JoinColumn(name = "level_id")
-	private Levels level;
+	private Levels level; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
 	
 	public Levels getLevel() {
 		return level;
@@ -45,7 +45,7 @@ public class Users {
 	public String getName() {
 		return name;
 	}
-	public void setNome(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public String getEmail() {

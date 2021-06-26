@@ -26,7 +26,11 @@
           </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Cadastrar-se</h1>
-            <form action="/cadastro" method="POST">
+            <form action="/cadastrar" method="POST">
+              <div class="form-group mb-4">
+                <label for="name">Nome</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Insira o nome" required>
+              </div>
               <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
@@ -34,10 +38,6 @@
               <div class="form-group mb-4">
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Sua senha" required>
-              </div>
-              <div class="form-group mb-4">
-                <label for="password">Repita a senha</label>
-                <input type="password" name="password_confirm" id="password-confirm" class="form-control" placeholder="Confirme a senha" required>
               </div>
               <button id="login" class="btn btn-block login-btn" type="submit">Cadastrar-se</button>
             </form>
