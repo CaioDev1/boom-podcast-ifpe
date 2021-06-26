@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+<div id="cadastro">
+<h1 style="color: White ">criar conta</h1>
+<form id="cadForm" action="/salvarLogin" method="post">
+
+	<input type="text" name="nome" placeholder="digite seu Nome" required="required"><br><br>
+	<input type="text"  name="login" placeholder="digite seu Email" required="required" ><br><br>
+	<input type="text" name="senha" placeholder="digite sua Senha" required="required" ><br><br>
+	aperte aqui se vc nao e um robo :<input type="radio" name="perfil" required="required" value="ADMIN"><br><br>
+	<input type="text" name="confirmapassword" placeholder="confirme sua Senha" required="required" ><br><br>
+	
+	<button type="submit">Salvar</button>
+	<div th:text="${mensagem}" style="color:red"></div>
+</form>
+
+</div>
+<a href="/Login">faça login</a>
+</body>
+</html>
