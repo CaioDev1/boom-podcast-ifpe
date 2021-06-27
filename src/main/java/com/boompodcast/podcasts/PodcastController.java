@@ -10,7 +10,7 @@ public class PodcastController {
 	@Autowired
 	private PodcastDao podcastDao;
 	
-	@PostMapping("/salvarpodcast")
+	@PostMapping("/add-podcast")
 	public String salvarPodcast(Podcasts podcast) {
 		this.podcastDao.save(podcast);
 		System.out.println(podcast);

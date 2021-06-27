@@ -28,7 +28,8 @@ public class Users {
 	private Access access;
 	@ManyToOne
 	@JoinColumn(name = "level_id")
-	private Levels level; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
+	// OU PODE USAR PRO LEVEL: @ColumnDefault("1")
+	private Levels level = 1; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
 	
 	public Levels getLevel() {
 		return level;
