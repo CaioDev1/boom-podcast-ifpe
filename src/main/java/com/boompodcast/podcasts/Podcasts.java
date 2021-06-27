@@ -1,11 +1,13 @@
 package com.boompodcast.podcasts;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.boompodcast.categorias.Categories;
+import com.boompodcast.categorias.CategoriesConverter;
 import com.boompodcast.usuarios.Users;
 @Entity
 public class Podcasts {
@@ -13,12 +15,13 @@ public class Podcasts {
 	private Integer id; 
 	private String name;	
 	private String description;
-	private String cover_path;
+	private String cover;
 	@ManyToOne
-	@JoinColumn(name = "categories_id")
+	@JoinColumn(name = "categories_id", nullable = false)
+	@Convert(converter = CategoriesConverter.class)  // TIRAR????
 	private Categories categories;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private Users user;
 
 	public Integer getId() {
@@ -39,11 +42,11 @@ public class Podcasts {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCover_path() {
-		return cover_path;
+	public String getCover() {
+		return cover;
 	}
-	public void setCover_path(String cover_path) {
-		this.cover_path = cover_path;
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 	public Categories getCategories() {
 		return categories;
@@ -58,5 +61,9 @@ public class Podcasts {
 		this.user = user;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Podcasts [id=" + id + ", name=" + name + ", description=" + description + ", cover=" + cover
+				+ ", categories=" + categories + ", user=" + user + "]";
+	}
 }

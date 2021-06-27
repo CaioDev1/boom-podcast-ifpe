@@ -18,7 +18,7 @@ public class UserController {
 	private List<Users> listaUser = new ArrayList<Users>();
 	
 	@PostMapping("/cadastrar")
-	public String cadastrarCategoriaObj(Users user, RedirectAttributes ra) {
+	public String cadastrarUsuario(Users user, RedirectAttributes ra) {
 		// Validacoes antes de chamar o DAO
 		/*if (user.getUsername().trim().isEmpty()) {
 			ra.addFlashAttribute("mensagem", "nome nao pode ficar em branco");
@@ -47,7 +47,7 @@ public class UserController {
 		*/
 		this.listaUser.add(user);
 		this.userDAO.save(user);
-		System.out.println(user);
+		System.out.println(user.toString());
 		return "redirect:/adm/home";
 	}
 

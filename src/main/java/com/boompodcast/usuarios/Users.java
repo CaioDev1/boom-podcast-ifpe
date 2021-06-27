@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import com.boompodcast.acesso.Access;
 import com.boompodcast.levels.Levels;
 
-@Entity
+@Entity @DynamicInsert
 public class Users {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +28,11 @@ public class Users {
 	@Column(length = 100)
 	private String password;
 	@Enumerated(EnumType.STRING)
+	@ColumnDefault("'ADMIN'")
 	private Access access;
 	@ManyToOne
-	@JoinColumn(name = "level_id")
-	// OU PODE USAR PRO LEVEL: @ColumnDefault("1")
-	private Levels level = 1; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
+	@JoinColumn(name = "level_id", columnDefinition = "integer default 1")
+	private Levels level; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
 	
 	public Levels getLevel() {
 		return level;
@@ -66,5 +69,10 @@ public class Users {
 	}
 	public void setAccess(Access access) {
 		this.access = access;
+	}
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", access="
+				+ access + ", level=" + level + "]";
 	}
 }

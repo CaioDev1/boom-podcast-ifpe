@@ -43,6 +43,7 @@ public class AcessoController {
 	public String efetuarLogin(String email, String password, HttpSession session, RedirectAttributes ra) {
 		// Buscar se existe um usuario com o login e senha informados
 		Users usuarioLogado = this.usuarioDAO.findByEmailAndPassword(email, password);
+		
 		if (usuarioLogado == null) {
 			ra.addFlashAttribute("mensagem", "Login/senha inválidos");
 			return "redirect:/";

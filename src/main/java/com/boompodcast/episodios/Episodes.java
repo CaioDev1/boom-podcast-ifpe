@@ -1,7 +1,6 @@
 package com.boompodcast.episodios;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,32 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.boompodcast.podcasts.Podcasts;
 
 @Entity
 public class Episodes {
-	LocalDate localDate = LocalDate.now();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String title;
-	private OffsetDateTime created_at;
+	@CreationTimestamp
+	private Date created_at; // OFFSETDATETIME TROCADO POR DATE E COLOCADO @CREATIONTIMESTAMP
 	private Integer duration;
     @ManyToOne
-    @JoinColumn(name = "podcast_id")
+    @JoinColumn(name = "podcast_id", nullable = false)
 	private Podcasts podcast;
-	private String file_path;
-
-
-	public LocalDate getLocalDate() {
-		return localDate;
-	}
-
-
-	public void setLocalDate(LocalDate localDate) {
-		this.localDate = localDate;
-	}
+	private String audio;
+	@ColumnDefault("0")
+	private Integer reactions_value;
 
 
 	public Integer getId() {
@@ -58,12 +52,12 @@ public class Episodes {
 	}
 
 
-	public OffsetDateTime getCreated_at() {
+	public Date getCreated_at() {
 		return created_at;
 	}
 
 
-	public void setCreated_at(OffsetDateTime created_at) {
+	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
 
@@ -88,13 +82,21 @@ public class Episodes {
 	}
 
 
-	public String getFile_path() {
-		return file_path;
+	public String getAudio() {
+		return audio;
 	}
 
 
-	public void setFile_path(String file_path) {
-		this.file_path = file_path;
+	public void setAudio(String audio) {
+		this.audio = audio;
+	}
+	
+	public Integer getReactions_value() {
+		return reactions_value;
+	}
+	
+	public void setReactions_value(Integer reactions_value) {
+		this.reactions_value = reactions_value;
 	}
 
 	@Override

@@ -17,15 +17,14 @@ public class Reactions {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne
-	@JoinColumn(name = "podcast_id")
+	@JoinColumn(name = "podcast_id", nullable = false)
 	private Podcasts podcast;
 	@ManyToOne
-	@JoinColumn(name = "episode_id")
+	@JoinColumn(name = "episode_id", nullable = false)
 	private Episodes episode;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = false)
 	private Users user;
-	private Integer value;
 	
 	public int getId() {
 		return id;
@@ -51,16 +50,9 @@ public class Reactions {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	public int getValue() {
-		return value;
-	}
-	public void setValue(int value) {
-		this.value = value;
-	}
 	
 	@Override
 	public String toString() {
-		return "Reactions [id=" + id + ", podcast=" + podcast + ", episode=" + episode + ", user="
-				+ user + ", value=" + value + "]";
+		return "Reactions [id=" + id + ", podcast=" + podcast + ", episode=" + episode + ", user=" + user + "]";
 	}
 }
