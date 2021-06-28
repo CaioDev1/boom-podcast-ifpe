@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,24 +19,33 @@ public class AcessoController {
 	private UsersDAO usuarioDAO;
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("page", "login");
 		return "login";
 	}
 	@GetMapping("/")
-	public String cadastro() {
+	public String cadastro(Model model) {
+		model.addAttribute("page", "register");
+		
 		return "register";
 	}
 	@GetMapping("/adm/home")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("page", "home");
+		
 		return "home";
 	}
 	@GetMapping("/adm/usuario")
-	public String usuario() {
+	public String usuario(Model model) {
+		model.addAttribute("page", "profile");
+		
 		return "profile";
 	}
 
 	@GetMapping("/adm/podcast")
-	public String podcast() {
+	public String podcast(Model model) {
+		model.addAttribute("page", "podcast");
+		
 		return "podcast";
 	}
 		
@@ -46,7 +56,7 @@ public class AcessoController {
 		
 		if (usuarioLogado == null) {
 			ra.addFlashAttribute("mensagem", "Login/senha inválidos");
-			return "redirect:/";
+			return "redirect:/login";
 		} else {
 			session.setAttribute("usuarioLogado", usuarioLogado);
 			return "redirect:/adm/home";

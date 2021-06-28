@@ -53,6 +53,11 @@ h1, h2, h3, h4, h5, h6, p {
     border-radius: 5px;
 }
 
+.page-container header {
+	position: relative;
+	z-index: 2;
+}
+
 .page-container header svg {
     height: 40px;
     width: 40px;
