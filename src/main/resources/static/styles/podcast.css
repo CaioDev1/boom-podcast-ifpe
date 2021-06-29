@@ -119,47 +119,11 @@ main {
 
         align-items: flex-end;
     }
-
-        #creator {
-            display: flex;
-            flex-direction: column;
-
-            align-items: center;
-        }
-
-            #creator h1 {
-                background-color: gray;
-
-                border-radius: 15px;
-
-                padding: 5px 10px;
-            }
-
-    /* ESTILIZAÇÃO REPETIDA DO ARQUIVO "PROFILE.CSS" */
-    #user-photo {
-        display: flex;
-        position: relative;
-    }
-
-        #user-photo svg {
-            height: 300px;
-            width: 300px;
-
-            fill: white;
-        }
-
-        #user-photo span {
-            position: absolute;
-            left: 15%;
-            top: -30%;
-
-            font-size: 20rem;
-            font-weight: bold;
-            color: white;
-
-            opacity: 0.2;
-        }
-
+    	
+    	/* DO COMPONENTE "USER" */
+    	#user-field {
+    		flex-direction: column-reverse;
+    	}
 
 @media screen and (max-width: 700px) {
     #podcast-header, #podcast-field {

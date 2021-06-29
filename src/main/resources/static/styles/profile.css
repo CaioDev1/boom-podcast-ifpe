@@ -14,52 +14,6 @@ main {
         margin-right: auto;
     }
 
-        #user-field {
-            display: flex;
-            flex-wrap: wrap;
-
-            text-align: center;
-        }
-        
-        #user-photo {
-            display: flex;
-            position: relative;
-        }
-
-            #user-photo svg{
-                height: 300px;
-                width: 300px;
-
-                fill: white;
-            }
-
-            #user-photo span {
-                position: absolute;
-                left: 15%;
-                top: -30%;
-
-                font-size: 20rem;
-                font-weight: bold;
-                color: white;
-
-                opacity: 0.2;
-            }
-
-            #user-info {
-                background-color: darkgray;
-                border-radius: 10px;
-
-                height: fit-content;
-
-                padding: 10px 20px;
-            }
-
-            #user-info > * {
-                color: white;
-
-                font-size: 2rem;
-            }
-
         #user-podcasts {
             padding-top: 20px;
         }
