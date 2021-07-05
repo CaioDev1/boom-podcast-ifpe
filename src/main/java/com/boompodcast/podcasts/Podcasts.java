@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.DynamicInsert;
-
 import com.boompodcast.categorias.Categories;
 import com.boompodcast.categorias.CategoriesConverter;
 import com.boompodcast.usuarios.Users;

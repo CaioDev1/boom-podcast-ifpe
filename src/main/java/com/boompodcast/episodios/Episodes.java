@@ -12,10 +12,11 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.boompodcast.podcasts.Podcasts;
 
-@Entity @DynamicInsert
+@Entity @DynamicInsert @DynamicUpdate
 public class Episodes {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,5 +115,12 @@ public class Episodes {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Episodes [id=" + id + ", title=" + title + ", created_at=" + created_at + ", duration=" + duration
+				+ ", podcast=" + podcast + ", audio=" + audio + ", reactions_value=" + reactions_value + "]";
 	}
 }

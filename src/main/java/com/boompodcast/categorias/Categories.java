@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class Categories {
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
@@ -64,5 +65,11 @@ public class Categories {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Categories [id=" + id + ", name=" + name + ", number_podcasts=" + number_podcasts + ", total_views="
+				+ total_views + "]";
 	}
 }

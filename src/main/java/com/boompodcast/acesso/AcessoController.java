@@ -1,5 +1,8 @@
 package com.boompodcast.acesso;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boompodcast.categorias.Categories;
+import com.boompodcast.categorias.CategoriesDao;
+import com.boompodcast.podcasts.PodcastDao;
+import com.boompodcast.podcasts.Podcasts;
 import com.boompodcast.usuarios.Users;
 import com.boompodcast.usuarios.UsersDAO;
 
@@ -17,6 +24,10 @@ public class AcessoController {
 
 	@Autowired
 	private UsersDAO usuarioDAO;
+	@Autowired
+	private CategoriesDao categoriesDao;
+	@Autowired
+	private PodcastDao podcastsDao;
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -36,7 +47,12 @@ public class AcessoController {
 		return "home";
 	}
 	@GetMapping("/adm/usuario")
-	public String usuario(Model model) {
+	public String usuario(Model model, HttpServletRequest request) {
+		List<Categories> categories = this.categoriesDao.findAll();
+		
+		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
+		List<Podcasts> user_podcasts = this.podcastsDao.findAllByUserContaining(usuarioLogado.getId());
+		
 		model.addAttribute("page", "profile");
 		
 		return "profile";

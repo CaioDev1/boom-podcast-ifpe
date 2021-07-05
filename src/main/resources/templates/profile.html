@@ -75,7 +75,7 @@
                     <input type="text" class="form-control item" name="title" id="title" placeholder="Título do episódio">
                 </div>
                 <div class="form-group">
-                    <select name="podcast" class="form-control item" id="podcast" required>
+                    <select name="form_podcast_id" class="form-control item" id="podcast" required>
                         <option value="" disabled hidden selected>Selecione o podcast</option>
                         <option value="1">PODCAST 1</option>
                         <option value="2">PODCAST 2</option>
@@ -84,11 +84,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="file" name="audio" id="audio-input" hidden>
+                    <input type="file" name="form_audio_file" id="audio-input" hidden>
+                    <input type="number" name="duration" id="duration-input" hidden>
                     <button type="button" class="form-control item" id="select-audio">Selecionar áudio</button>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-warning create-account">BOOM!</button>
+                    <button type="submit" class="btn btn-block btn-warning create-account submit-episode-button" disabled>BOOM!</button>
                 </div>
             </form>
         </div>
@@ -121,6 +122,37 @@
 
           $('#select-audio').click(e => {
               $('#audio-input').click()
+          })
+          
+          // MUDAR VALOR DA DURAÇÃO DO ÁUDIO NO FORM
+          $("#audio-input").on("change", event => {
+              let target = event.currentTarget
+              let file = target.files[0];
+              
+              if(target.files && file && ['audio/ogg', 'audio/mp3', 'audio/wav', 'audio/webm', 'audio/mpeg'].includes(file.type)) {
+                  let reader = new FileReader()
+                  let audio = document.createElement("audio")
+
+                  reader.onload = reader_event => {
+                    audio.src = reader_event.target.result
+
+                    audio.onloadedmetadata = () => {
+                        let duration = Math.trunc(audio.duration)
+
+                        $('#duration-input').val(duration)
+                        $('.submit-episode-button').removeAttr('disabled')
+                    }
+                  }
+
+                  reader.onerror = error => {
+                      console.log(error)
+                  }
+
+                  reader.readAsDataURL(file)
+              } else {
+                  alert("Tipo de arquivo não suportado ou arquivo não encontrado.")
+                  $('.submit-episode-button').attr('disabled', true)
+              }
           })
       </script>
   </body>
