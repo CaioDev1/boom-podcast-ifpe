@@ -51,9 +51,12 @@ public class AcessoController {
 		List<Categories> categories = this.categoriesDao.findAll();
 		
 		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
-		List<Podcasts> user_podcasts = this.podcastsDao.findAllByUserContaining(usuarioLogado.getId());
+		List<Podcasts> user_podcasts = this.podcastsDao.findAllByUser(usuarioLogado);
 		
 		model.addAttribute("page", "profile");
+		model.addAttribute("categories", categories);
+		model.addAttribute("user_podcasts", user_podcasts);
+		model.addAttribute("user", usuarioLogado);
 		
 		return "profile";
 	}
