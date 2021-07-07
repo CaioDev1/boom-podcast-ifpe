@@ -30,13 +30,14 @@ public class FirebaseController {
 		FirebaseController.storage = StorageOptions.newBuilder()
 		  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 		  .build().getService();
-		
 	}
 	
 	public static String uploadFile(MultipartFile multipartFile, String fileName, String folder) throws IOException {
 		File file = FirebaseController.convertToFile(multipartFile, fileName);
-		// resolver problema do url encoding na plataforma do firebase!!!
-        BlobId blobId = BlobId.of(bucket_name, String.format(folder+"%s"+fileName, URLDecoder.decode("/", StandardCharsets.UTF_8)));
+		
+		String file_path = folder.concat(fileName);
+		
+        BlobId blobId = BlobId.of(bucket_name, file_path);
         Map<String, String> map = new HashMap<>();
         map.put("firebaseStorageDownloadTokens", fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
@@ -46,8 +47,8 @@ public class FirebaseController {
         
         storage.create(blobInfo, Files.readAllBytes(file.toPath()));
         
-        return String.format("https://firebasestorage.googleapis.com/v0/b/"+bucket_name+"/o/"+folder+"/%s?alt=media&token=%s", 
-        	URLEncoder.encode(fileName, StandardCharsets.UTF_8), URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        return String.format("https://firebasestorage.googleapis.com/v0/b/"+bucket_name+"/o/%s?alt=media&token=%s", 
+        	URLEncoder.encode(file_path, StandardCharsets.UTF_8), URLEncoder.encode(fileName, StandardCharsets.UTF_8));
     }
 
     private static File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {

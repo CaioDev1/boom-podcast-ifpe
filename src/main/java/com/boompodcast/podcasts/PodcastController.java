@@ -39,7 +39,7 @@ public class PodcastController {
 			if(!form_cover_file.isEmpty()) {
 				String newCoverFileName = String.valueOf(podcast.getId()) + "_" + form_cover_file.getOriginalFilename();
 
-				String cover_file_url = FirebaseController.uploadFile(form_cover_file, newCoverFileName, "covers");
+				String cover_file_url = FirebaseController.uploadFile(form_cover_file, newCoverFileName, "covers/");
 				
 				podcast.setCover(cover_file_url);
 				

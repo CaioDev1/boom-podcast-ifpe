@@ -32,7 +32,7 @@ public class EpisodesController {
 			if(!form_audio_file.isEmpty()) {
 				String newAudioFileName = String.valueOf(episode.getId()) + "_" + form_audio_file.getOriginalFilename();
 				
-				String audio_file_url = FirebaseController.uploadFile(form_audio_file, newAudioFileName, "audios");
+				String audio_file_url = FirebaseController.uploadFile(form_audio_file, newAudioFileName, "audios/");
 				
 				episode.setAudio(audio_file_url);
 				
