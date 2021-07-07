@@ -47,6 +47,8 @@ public class FirebaseController {
         
         storage.create(blobInfo, Files.readAllBytes(file.toPath()));
         
+        file.delete();
+        
         return String.format("https://firebasestorage.googleapis.com/v0/b/"+bucket_name+"/o/%s?alt=media&token=%s", 
         	URLEncoder.encode(file_path, StandardCharsets.UTF_8), URLEncoder.encode(fileName, StandardCharsets.UTF_8));
     }
