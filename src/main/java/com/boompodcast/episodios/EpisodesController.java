@@ -1,9 +1,6 @@
 package com.boompodcast.episodios;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.boompodcast.podcasts.PodcastDao;
 import com.boompodcast.podcasts.Podcasts;
 
-import app_paths.AppPaths;
+import firebase.FirebaseController;
 
 @Controller
 public class EpisodesController {
@@ -33,13 +30,11 @@ public class EpisodesController {
 		
 		try {
 			if(!form_audio_file.isEmpty()) {
-				byte[] bytes = form_audio_file.getBytes();
 				String newAudioFileName = String.valueOf(episode.getId()) + "_" + form_audio_file.getOriginalFilename();
 				
-				Path audioFilePath = Paths.get(AppPaths.audiosFolderPath + newAudioFileName);
-				Files.write(audioFilePath, bytes);
+				String audio_file_url = FirebaseController.uploadFile(form_audio_file, newAudioFileName, "audios");
 				
-				episode.setAudio(newAudioFileName);
+				episode.setAudio(audio_file_url);
 				
 				this.episodesDao.save(episode);
 			}

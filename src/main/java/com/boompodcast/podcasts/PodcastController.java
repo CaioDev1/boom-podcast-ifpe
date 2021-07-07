@@ -1,9 +1,6 @@
 package com.boompodcast.podcasts;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +14,7 @@ import com.boompodcast.categorias.Categories;
 import com.boompodcast.categorias.CategoriesDao;
 import com.boompodcast.usuarios.Users;
 
-import app_paths.AppPaths;
+import firebase.FirebaseController;
 
 @Controller
 public class PodcastController {
@@ -40,13 +37,11 @@ public class PodcastController {
 		
 		try {
 			if(!form_cover_file.isEmpty()) {
-				byte[] bytes = form_cover_file.getBytes();
 				String newCoverFileName = String.valueOf(podcast.getId()) + "_" + form_cover_file.getOriginalFilename();
+
+				String cover_file_url = FirebaseController.uploadFile(form_cover_file, newCoverFileName, "covers");
 				
-				Path podcastCoverFilePath = Paths.get(AppPaths.coverFolderPath + newCoverFileName);
-				Files.write(podcastCoverFilePath, bytes);
-				
-				podcast.setCover(newCoverFileName);
+				podcast.setCover(cover_file_url);
 				
 				this.podcastDao.save(podcast);
 			}
