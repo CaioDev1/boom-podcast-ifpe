@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="www.thymeleaf.org"&gt;>
+<head th:replace="components :: head(${page}, ~{::meta})">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div class="page-container">
+   <th:block th:replace="components :: header"></th:block>
+      <main>
+        <div id="podcast-header">
+            <div id="podcast-cover">
+                <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="">
+            </div>
+            <div id="podcast-info">
+                <h1>Flow Podcast</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur impedit, nostrum reprehenderit, pariatur facere enim soluta non at molestias neque nemo aliquam obcaecati </p>
+            </div>
+        </div>
+        <div id="podcast-field">
+            <div id="podcast-episodes">
+                <h1 class="mb-4">Episódios</h1>
+                <div id="podcast-episodes-list">
+                    <th:block th:replace="components :: episode"></th:block>
+                    <th:block th:replace="components :: episode"></th:block>
+                </div>
+            </div>
+            <div id="podcast-creator">
+            	<th:block th:replace="components :: user"></th:block>
+            </div>
+        </div>
+      </main>
+
+      <th:block th:replace="components :: player"></th:block>
+  	  <th:block th:replace="components :: scripts(${page})"></th:block>
+      <script>
+          $(function() {
+              $('audio').audioPlayer();
+          });
+
+          $('#select-cover').on('click', e => {
+              $('input[type=file]').click()
+          })
+      </script>
+  </body>
+  </html>

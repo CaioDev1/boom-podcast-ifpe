@@ -9,6 +9,10 @@ body {
     background-color: #212529;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+    color:  white;
+}
+
 #player-container {
     position: fixed;
     bottom: 0;
@@ -47,6 +51,13 @@ body {
     left: 5%;
 
     border-radius: 5px;
+}
+
+.page-container header {
+	position: relative;
+	z-index: 2;
+	
+	background-color: #181a1c;
 }
 
 .page-container header svg {
@@ -88,3 +99,52 @@ body {
 
     right: -80px;
 }
+
+
+
+/* ESTILIZAÇÃO DO COMPONENTE "USER" DA PÁGINA */
+#user-field {
+    display: flex;
+    flex-wrap: wrap;
+
+    text-align: center;
+}
+
+ #user-photo {
+     display: flex;
+     position: relative;
+ }
+
+     #user-photo svg{
+         height: 300px;
+         width: 300px;
+
+         fill: white;
+     }
+
+     #user-photo span {
+         position: absolute;
+         left: 15%;
+         top: -30%;
+
+         font-size: 20rem;
+         font-weight: bold;
+         color: white;
+
+         opacity: 0.2;
+     }
+
+     #user-info {
+         background-color: darkgray;
+         border-radius: 10px;
+
+         height: fit-content;
+
+         padding: 10px 20px;
+     }
+
+     #user-info > * {
+         color: white;
+
+         font-size: 1.5rem;
+     }

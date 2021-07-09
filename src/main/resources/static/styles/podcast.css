@@ -1,0 +1,154 @@
+.page-container {
+    padding-bottom: 80px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 5%;
+
+    width: 100%;
+}
+
+    #podcast-header {
+        display: flex;
+
+        width: 100%;
+
+        padding-bottom: 50px;
+    }
+
+        #podcast-cover {
+            height: 300px;
+            width: 300px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-right: 50px;
+        }
+
+            #podcast-cover img {
+                height: 100%;
+                width: 100%;
+            }
+
+        #podcast-info {
+            width: calc(100% - 300px);
+        }
+
+            #podcast-info h1 {
+                font-size: 5rem;
+
+                margin-bottom: 20px;
+            }
+
+    #podcast-field {
+        display: flex;
+    }
+
+        #podcast-field button {
+            display: flex;
+
+            background: transparent;
+
+            border: none;
+        }
+
+        #podcast-episodes {
+            width: 50%;
+        }
+        
+        #podcast-episodes-list, .episode-body {
+            width: 100%;
+        }
+
+        .episode, .episode-header, .episode-footer, .episode-views, .episode-reactions {
+            display: flex;
+
+            align-items: center;
+        }
+
+            .episode {
+                background-color: gray;
+
+                border-radius: 15px;
+
+                padding: 10px 15px;
+
+                width: 100%;
+
+                margin-bottom: 10px;
+            }
+
+                .episode:last-child {
+                    margin-bottom: 0;
+                }
+
+                .episode-play {
+                    margin-right: 10px;
+                }
+
+                .episode-header, .episode-footer {
+                    justify-content: space-between;
+                }
+
+                    .episode-header h1 {
+                        font-size: 1.5rem;
+                    }
+                
+                .episode-views svg, .episode-reactions svg {
+                    margin-right: 5px;
+
+                    height: 22px;
+                    width: 22px;
+                }
+
+                    .reaction-button:hover > * {
+                        fill: red;
+                        color: red;
+                    }
+
+    #podcast-creator {
+        display: flex;
+        flex-direction: column;
+
+        width: 50%;
+
+        align-items: flex-end;
+    }
+    	
+    	/* DO COMPONENTE "USER" */
+    	#user-field {
+    		flex-direction: column-reverse;
+    	}
+
+@media screen and (max-width: 700px) {
+    #podcast-header, #podcast-field {
+        flex-direction: column;
+    }
+
+    #podcast-header > *, #podcast-field > * {
+        width: 100%;
+    }
+
+        #podcast-cover {
+            width: 350px;
+            height: 350px;
+
+            margin: 0 auto 30px;
+        }
+
+        #podcast-info h1 {
+            font-size: 3rem;
+        }
+
+    #podcast-creator {
+        padding-top: 50px;
+        
+        align-items: center;
+    }
+}
+            
