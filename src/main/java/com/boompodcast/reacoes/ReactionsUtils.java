@@ -8,7 +8,7 @@ public class ReactionsUtils {
 		List<Integer> list = new ArrayList<>();
 		
 		for(ProjectId item : projection) {
-			list.add(item.getId());
+			list.add(item.getEpisode_id());
 		}
 		
 		return list;

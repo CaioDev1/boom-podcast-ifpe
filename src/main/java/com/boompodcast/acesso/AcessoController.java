@@ -79,8 +79,10 @@ public class AcessoController {
 		
 		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
 		List<Integer> reactionsIdList = ReactionsUtils.projectionToList(
-			this.reactionsDao.findAllIdByUserAndPodcast(usuarioLogado, podcast)
+			this.reactionsDao.findAllEpisodeIdByUserAndPodcast(usuarioLogado, podcast)
 		);
+		
+		System.out.println(reactionsIdList.toString());
 				
 		model.addAttribute("page", "podcast");
 		model.addAttribute("podcast", podcast);

@@ -61,23 +61,14 @@
           $('.episode-duration').map((i, el) => {
               el.textContent = format(el.textContent)
           });
-
-          function findElementThroughtParents(el, targetEl, callback) {
-            while(el) {
-                if(el.querySelector(targetEl)) break
-
-                el = el.parentElement
-            }
-
-            el == null ? console.warn('Elemento parente não encontrado')
-            : callback(el)
-          }
           
-          $('.reaction-button').click(e => {
-              findElementThroughtParents(e.target, '.episode', el => {
-                e.target.disabled = true
+          $('.episode').each((i, episodeEl) => {
+            // FAZ A REQUISIÇÃO DO LIKE PARA O SERVIDOR
+            $(episodeEl).find('.reaction-button').on('click', e => {
+                let button = e.currentTarget
+                button.disabled = true
 
-                let form_episode_id = el.querySelector('.episode').dataset.episode_id
+                let form_episode_id = episodeEl.dataset.episode_id
 
                 fetch('/reaction', {
                     method: 'POST',
@@ -86,13 +77,32 @@
                     },
                     body: `form_episode_id=${form_episode_id}`
                 }).then(response => response.json()).then(res => {
-                    el.querySelector('.reaction-button').classList.toggle('liked')
+                    $(button).toggleClass('liked')
 
-                    e.target.disabled = false
+                    button.disabled = false
+                    
+                    // AUMENTA OU DIMINUI O VALOR DO LIKE
+                    let likeValueEl =  $(button).find('span')
+
+                    if(res.like) {
+                       likeValueEl.text(Number(likeValueEl.text()) + 1)
+                    } else {
+                        likeValueEl.text(Number(likeValueEl.text()) - 1)
+                    }
                 })
-              })
+            })
+
+            // DA O PLAY NO PODCAST QUANDO CLICADO NO CONTAINER DE EPISÓDIO
+            $(episodeEl).find('.episode-play').on('click', e => {
+                let audio_src = episodeEl.dataset.audio_src
+
+                let audioplayer = $('.audioplayer audio')
+
+                audioplayer.attr('src') != audio_src && audioplayer.attr('src', audio_src)
+                
+                $('.audioplayer-playpause').click()
+            })
           })
-          
           
       </script>
   </body>

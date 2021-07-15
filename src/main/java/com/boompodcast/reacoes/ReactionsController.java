@@ -27,21 +27,24 @@ public class ReactionsController {
 		Episodes episode = this.episodesDao.getOne(form_episode_id);
 		
 		boolean userReactionExists = this.reactionsDao.existsByEpisodeAndUser(episode, usuarioLogado);
-		
+	
 		ObjectNode response = new ObjectMapper().createObjectNode();
 
 		if(userReactionExists) {
 			this.reactionsDao.deleteByEpisode(episode);
 			
+			this.episodesDao.decrementEpisodeReactions(form_episode_id);
+			
 			response.put("like", false);
 		} else {
 			Reactions newReaction = new Reactions(episode.getPodcast(), episode, usuarioLogado);
-
 			this.reactionsDao.save(newReaction);
+			
+			this.episodesDao.incrementEpisodeReactions(form_episode_id);
 			
 			response.put("like", true);
 		}
-		
+				
 		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
 }

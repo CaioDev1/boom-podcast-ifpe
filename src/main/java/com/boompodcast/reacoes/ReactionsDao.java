@@ -13,7 +13,7 @@ import com.boompodcast.usuarios.Users;
 
 @Repository
 public interface ReactionsDao extends JpaRepository<Reactions, Integer> {
-	public List<ProjectId> findAllIdByUserAndPodcast(Users user, Podcasts podcast);
+	public List<ProjectId> findAllEpisodeIdByUserAndPodcast(Users user, Podcasts podcast);
 	
 	public boolean existsByEpisodeAndUser(Episodes episode, Users user);
 	
