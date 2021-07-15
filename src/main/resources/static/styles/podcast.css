@@ -106,7 +106,7 @@ main {
                     width: 22px;
                 }
 
-                    .reaction-button:hover > * {
+                    .reaction-button:hover > *, .reaction-button.liked > * {
                         fill: red;
                         color: red;
                     }

@@ -9,19 +9,20 @@
       <main>
         <div id="podcast-header">
             <div id="podcast-cover">
-                <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="">
+                <img th:src="${podcast.cover}" alt="pdc_img">
             </div>
             <div id="podcast-info">
-                <h1>Flow Podcast</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur impedit, nostrum reprehenderit, pariatur facere enim soluta non at molestias neque nemo aliquam obcaecati </p>
+                <h1 th:text="${podcast.name}"></h1>
+                <p th:text="${podcast.description}"></p>
             </div>
         </div>
         <div id="podcast-field">
             <div id="podcast-episodes">
                 <h1 class="mb-4">Episódios</h1>
                 <div id="podcast-episodes-list">
-                    <th:block th:replace="components :: episode"></th:block>
-                    <th:block th:replace="components :: episode"></th:block>
+                	<th:block th:each="ep : ${episodes}">
+                    	<th:block th:replace="components :: episode(${ep})"></th:block>
+                	</th:block>
                 </div>
             </div>
             <div id="podcast-creator">
@@ -40,6 +41,27 @@
           $('#select-cover').on('click', e => {
               $('input[type=file]').click()
           })
+          
+          function format(time) {
+		    var hrs = ~~(time / 3600);
+		    var mins = ~~((time % 3600) / 60);
+		    var secs = ~~time % 60;
+		    
+		    var ret = "";
+		    if (hrs > 0) {
+		        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+		    }
+		    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+		    ret += "" + secs;
+		    
+		    return ret;
+          }
+          
+          $('.episode-duration').map((i, el) => {
+              el.textContent = format(el.textContent)
+          })
+          
+          
       </script>
   </body>
   </html>

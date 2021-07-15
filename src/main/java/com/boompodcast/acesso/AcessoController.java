@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boompodcast.categorias.Categories;
 import com.boompodcast.categorias.CategoriesDao;
+import com.boompodcast.episodios.Episodes;
+import com.boompodcast.episodios.EpisodesDao;
 import com.boompodcast.podcasts.PodcastDao;
 import com.boompodcast.podcasts.Podcasts;
+import com.boompodcast.reacoes.Reactions;
+import com.boompodcast.reacoes.ReactionsDao;
 import com.boompodcast.usuarios.Users;
 import com.boompodcast.usuarios.UsersDAO;
 
@@ -28,6 +33,10 @@ public class AcessoController {
 	private CategoriesDao categoriesDao;
 	@Autowired
 	private PodcastDao podcastsDao;
+	@Autowired
+	private EpisodesDao episodesDao;
+	@Autowired
+	private ReactionsDao reactionsDao;
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -61,9 +70,25 @@ public class AcessoController {
 		return "profile";
 	}
 
-	@GetMapping("/adm/podcast")
-	public String podcast(Model model) {
+	@GetMapping("/adm/podcast/{podcast_id}")
+	public String podcast(Model model, @PathVariable Integer podcast_id, HttpServletRequest request) {
+		Podcasts podcast = this.podcastsDao.getOne(podcast_id);
+		List<Episodes> episodes = this.episodesDao.findAllByPodcast(podcast);
+		
+		Users podcastOwner = this.usuarioDAO.getOne(podcast.getUser().getId());
+		
+		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
+		List<Reactions> user_reactions = this.reactionsDao.findAllIdByUserAndPodcast(usuarioLogado, podcast);
+		
+		System.out.println(user_reactions.size());
+		for(Object item : user_reactions) {
+			System.out.println(item.toString());
+		}
 		model.addAttribute("page", "podcast");
+		model.addAttribute("podcast", podcast);
+		model.addAttribute("episodes", episodes);
+		model.addAttribute("user", podcastOwner);
+		model.addAttribute("user_reactions", user_reactions);
 		
 		return "podcast";
 	}
