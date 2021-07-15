@@ -42,6 +42,7 @@
               $('input[type=file]').click()
           })
           
+          // FUNÇÃO QUE FORMATA O TEMPO DE DURAÇÃO DOS EPISÓDIOS
           function format(time) {
 		    var hrs = ~~(time / 3600);
 		    var mins = ~~((time % 3600) / 60);
@@ -59,6 +60,37 @@
           
           $('.episode-duration').map((i, el) => {
               el.textContent = format(el.textContent)
+          });
+
+          function findElementThroughtParents(el, targetEl, callback) {
+            while(el) {
+                if(el.querySelector(targetEl)) break
+
+                el = el.parentElement
+            }
+
+            el == null ? console.warn('Elemento parente não encontrado')
+            : callback(el)
+          }
+          
+          $('.reaction-button').click(e => {
+              findElementThroughtParents(e.target, '.episode', el => {
+                e.target.disabled = true
+
+                let form_episode_id = el.querySelector('.episode').dataset.episode_id
+
+                fetch('/reaction', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `form_episode_id=${form_episode_id}`
+                }).then(response => response.json()).then(res => {
+                    el.querySelector('.reaction-button').classList.toggle('liked')
+
+                    e.target.disabled = false
+                })
+              })
           })
           
           

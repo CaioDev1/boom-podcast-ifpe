@@ -1,6 +1,5 @@
 package com.boompodcast.podcasts;
 
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.boompodcast.categorias.Categories;
-import com.boompodcast.categorias.CategoriesConverter;
 import com.boompodcast.usuarios.Users;
 @Entity
 public class Podcasts {
@@ -20,7 +18,7 @@ public class Podcasts {
 	private String cover;
 	@ManyToOne
 	@JoinColumn(name = "categories_id", nullable = false)
-	@Convert(converter = CategoriesConverter.class)  // TIRAR????
+	//@Convert(converter = CategoriesConverter.class)  // TIRAR????
 	private Categories categories;
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)

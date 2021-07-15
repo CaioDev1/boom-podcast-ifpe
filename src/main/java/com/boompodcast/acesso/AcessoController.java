@@ -19,8 +19,8 @@ import com.boompodcast.episodios.Episodes;
 import com.boompodcast.episodios.EpisodesDao;
 import com.boompodcast.podcasts.PodcastDao;
 import com.boompodcast.podcasts.Podcasts;
-import com.boompodcast.reacoes.Reactions;
 import com.boompodcast.reacoes.ReactionsDao;
+import com.boompodcast.reacoes.ReactionsUtils;
 import com.boompodcast.usuarios.Users;
 import com.boompodcast.usuarios.UsersDAO;
 
@@ -78,17 +78,15 @@ public class AcessoController {
 		Users podcastOwner = this.usuarioDAO.getOne(podcast.getUser().getId());
 		
 		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
-		List<Reactions> user_reactions = this.reactionsDao.findAllIdByUserAndPodcast(usuarioLogado, podcast);
-		
-		System.out.println(user_reactions.size());
-		for(Object item : user_reactions) {
-			System.out.println(item.toString());
-		}
+		List<Integer> reactionsIdList = ReactionsUtils.projectionToList(
+			this.reactionsDao.findAllIdByUserAndPodcast(usuarioLogado, podcast)
+		);
+				
 		model.addAttribute("page", "podcast");
 		model.addAttribute("podcast", podcast);
 		model.addAttribute("episodes", episodes);
 		model.addAttribute("user", podcastOwner);
-		model.addAttribute("user_reactions", user_reactions);
+		model.addAttribute("user_reactions", reactionsIdList);
 		
 		return "podcast";
 	}

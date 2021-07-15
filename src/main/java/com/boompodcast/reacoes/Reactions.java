@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import com.boompodcast.episodios.Episodes;
 import com.boompodcast.podcasts.Podcasts;
 import com.boompodcast.usuarios.Users;
 
-@Entity
+@Entity @DynamicInsert
 public class Reactions {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +28,18 @@ public class Reactions {
 	@JoinColumn(name = "user_id", nullable = false)
 	private Users user;
 	
-	public int getId() {
+	public Reactions() {}
+	
+	public Reactions(Podcasts podcast, Episodes episode, Users user) {
+		this.podcast = podcast;
+		this.episode = episode;
+		this.user = user;
+	}
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Podcasts getPodcast() {
