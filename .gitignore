@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-**/java/ifpe-boompodcast-firebase-adminsdk.json
+**/java/*.json
 
 ### STS ###
 .apt_generated
