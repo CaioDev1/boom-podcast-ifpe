@@ -3,7 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-ifpe-boompodcast-firebase-adminsdk.json
+
+!**/src/main/java/ifpe-boompodcast-firebase-adminsdk.json
 
 ### STS ###
 .apt_generated
