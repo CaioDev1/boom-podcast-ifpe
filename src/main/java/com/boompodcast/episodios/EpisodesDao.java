@@ -23,5 +23,11 @@ public interface EpisodesDao extends JpaRepository<Episodes, Integer> {
 	@Modifying
 	@Query("UPDATE Episodes t SET t.reactions_value = t.reactions_value - 1 WHERE t.id = :episodeId")
 	public void decrementEpisodeReactions(@Param("episodeId") Integer episodeId);
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE Episodes t SET t.views = t.views + 1 WHERE t.id = :episodeId")
+	public void incrementViews(@Param("episodeId") Integer episodeId);
+	
 }
 

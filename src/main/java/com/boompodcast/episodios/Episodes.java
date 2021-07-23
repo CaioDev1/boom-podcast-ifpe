@@ -31,6 +31,8 @@ public class Episodes {
 	private String audio;
 	@ColumnDefault("0")
 	private Integer reactions_value;
+	@ColumnDefault("0")
+	private Integer views;
 
 
 	public Integer getId() {
@@ -100,6 +102,15 @@ public class Episodes {
 		this.reactions_value = reactions_value;
 	}
 
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -121,6 +132,7 @@ public class Episodes {
 	@Override
 	public String toString() {
 		return "Episodes [id=" + id + ", title=" + title + ", created_at=" + created_at + ", duration=" + duration
-				+ ", podcast=" + podcast + ", audio=" + audio + ", reactions_value=" + reactions_value + "]";
+				+ ", podcast=" + podcast + ", audio=" + audio + ", reactions_value=" + reactions_value + ", views="
+				+ views + "]";
 	}
 }

@@ -38,72 +38,127 @@
               $('audio').audioPlayer();
           });
 
-          $('#select-cover').on('click', e => {
-              $('input[type=file]').click()
-          })
-          
-          // FUNÇÃO QUE FORMATA O TEMPO DE DURAÇÃO DOS EPISÓDIOS
-          function format(time) {
-		    var hrs = ~~(time / 3600);
-		    var mins = ~~((time % 3600) / 60);
-		    var secs = ~~time % 60;
-		    
-		    var ret = "";
-		    if (hrs > 0) {
-		        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-		    }
-		    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-		    ret += "" + secs;
-		    
-		    return ret;
-          }
-          
-          $('.episode-duration').map((i, el) => {
-              el.textContent = format(el.textContent)
-          });
-          
-          $('.episode').each((i, episodeEl) => {
-            // FAZ A REQUISIÇÃO DO LIKE PARA O SERVIDOR
-            $(episodeEl).find('.reaction-button').on('click', e => {
-                let button = e.currentTarget
-                button.disabled = true
+          $(document).ready(() => {
+            $('#select-cover').on('click', e => {
+                $('input[type=file]').click()
+            })
+            
+            // FUNÇÃO QUE FORMATA O TEMPO DE DURAÇÃO DOS EPISÓDIOS
+            function format(time) {
+                var hrs = ~~(time / 3600);
+                var mins = ~~((time % 3600) / 60);
+                var secs = ~~time % 60;
+                
+                var ret = "";
+                if (hrs > 0) {
+                    ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+                }
+                ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+                ret += "" + secs;
+                
+                return ret;
+            }
+            
+            $('.episode-duration').map((i, el) => {
+                el.textContent = format(el.textContent)
+            });
+            
 
-                let form_episode_id = episodeEl.dataset.episode_id
+            let currentEpisode
+            let episodeQueue = {
+                previousEpisode: null,
+                nextEpisode: null
+            }
+            let audioplayer = $('.audioplayer audio')
 
-                fetch('/reaction', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `form_episode_id=${form_episode_id}`
-                }).then(response => response.json()).then(res => {
-                    $(button).toggleClass('liked')
+            function handleEpisodeFetch(url, form_episode_id, method='POST') {
+                return new Promise((resolve, reject) => {
+                    fetch(url, {
+                        method,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `form_episode_id=${form_episode_id}`
+                    }).then(response => response.json()).then(res => {
+                        resolve(res)
+                    }).catch(err => reject(err))
+                })
+            }
 
-                    button.disabled = false
-                    
-                    // AUMENTA OU DIMINUI O VALOR DO LIKE
-                    let likeValueEl =  $(button).find('span')
+            $('.episode').each((i, episodeEl) => {
+                // FAZ A REQUISIÇÃO DO LIKE PARA O SERVIDOR
+                $(episodeEl).find('.reaction-button').on('click', e => {
+                    let button = e.currentTarget
+                    button.disabled = true
 
-                    if(res.like) {
-                       likeValueEl.text(Number(likeValueEl.text()) + 1)
-                    } else {
-                        likeValueEl.text(Number(likeValueEl.text()) - 1)
-                    }
+                    let form_episode_id = episodeEl.dataset.episode_id
+
+                    handleEpisodeFetch('/reaction', form_episode_id).then(res => {
+                        $(button).toggleClass('liked')
+
+                        button.disabled = false
+                        
+                        // AUMENTA OU DIMINUI O VALOR DO LIKE
+                        let likeValueEl =  $(button).find('span')
+
+                        if(res.like) {
+                        likeValueEl.text(Number(likeValueEl.text()) + 1)
+                        } else {
+                            likeValueEl.text(Number(likeValueEl.text()) - 1)
+                        }
+                    })
+                })
+
+                // DA O PLAY NO PODCAST QUANDO CLICADO NO CONTAINER DE EPISÓDIO
+                $(episodeEl).find('.episode-play').on('click', e => {
+                    let audio_src = episodeEl.dataset.audio_src
+
+                    changeEpisode(audio_src)
+
+                    currentEpisode = episodeEl
+                    handleEpisodeQueue(currentEpisode)
+
+                    handleEpisodeFetch('/add-view', episodeEl.dataset.episode_id).then(res => {
+                        let viewsEl = $(episodeEl).find('.episode-views span')
+
+                        viewsEl.text(Number(viewsEl.text()) + 1)
+                    }).catch(err => console.error(err))
                 })
             })
 
-            // DA O PLAY NO PODCAST QUANDO CLICADO NO CONTAINER DE EPISÓDIO
-            $(episodeEl).find('.episode-play').on('click', e => {
-                let audio_src = episodeEl.dataset.audio_src
+            // MODIFICA AS FILAS DE PRÓXIMOS E PRÉVIOS EP'S, ALÉM DE DESATIVAR OS BOTÕES CONFORMA A EXISTÊNCIA DE PRÓX. E PREV. EP'S
+            function handleEpisodeQueue(ep) {
+                episodeQueue.nextEpisode = $(ep).next().length ? $(ep).next().data('audio_src') : null
+                episodeQueue.previousEpisode = $(ep).prev().length ? $(ep).prev().data('audio_src') : null
 
-                let audioplayer = $('.audioplayer audio')
+                $('.player-next-button').attr('disabled', episodeQueue.nextEpisode == null ? true : false)
+                $('.player-previous-button').attr('disabled', episodeQueue.previousEpisode == null ? true : false)
+            }
 
+            function isAlreadyPlaying() {
+                return $('.audioplayer.audioplayer-playing').length != 0
+            }
+
+            function changeEpisode(audio_src) {
+                isAlreadyPlaying() && $('.audioplayer-playpause').click()
                 audioplayer.attr('src') != audio_src && audioplayer.attr('src', audio_src)
-                
                 $('.audioplayer-playpause').click()
+            }
+
+            $('.player-next-button').on('click', e => {
+                changeEpisode(episodeQueue.nextEpisode)
+
+                currentEpisode = $(currentEpisode).next().length ? $(currentEpisode).next() : currentEpisode
+                handleEpisodeQueue(currentEpisode)
+            })
+
+            $('.player-previous-button').on('click', e => {
+                changeEpisode(episodeQueue.previousEpisode)
+
+                currentEpisode = $(currentEpisode).prev().length ? $(currentEpisode).prev() : currentEpisode
+                handleEpisodeQueue(currentEpisode)
             })
           })
-          
       </script>
   </body>
   </html>

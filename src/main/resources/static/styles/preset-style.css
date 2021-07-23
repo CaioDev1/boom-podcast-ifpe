@@ -84,6 +84,10 @@ h1, h2, h3, h4, h5, h6, p {
             height: 30px;
             width: 30px;
         }
+        
+    .player-previous-button:DISABLED, .player-next-button:DISABLED {
+    	opacity: 0.5;
+    }
 
 .player-body {
     display: flex;
@@ -131,7 +135,7 @@ h1, h2, h3, h4, h5, h6, p {
          font-weight: bold;
          color: white;
 
-         opacity: 0.2;
+         opacity: 0.09;
      }
 
      #user-info {
