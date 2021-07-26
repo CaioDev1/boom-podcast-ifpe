@@ -34,10 +34,6 @@
       <th:block th:replace="components :: player"></th:block>
   	  <th:block th:replace="components :: scripts(${page})"></th:block>
       <script>
-          $(function() {
-              $('audio').audioPlayer();
-          });
-
           $(document).ready(() => {
             $('#select-cover').on('click', e => {
                 $('input[type=file]').click()
@@ -69,7 +65,8 @@
                 previousEpisode: null,
                 nextEpisode: null
             }
-            let audioplayer = $('.audioplayer audio')
+            let audioEl = $('#player-container audio')
+            let audioPlayer
 
             function handleEpisodeFetch(url, form_episode_id, method='POST') {
                 return new Promise((resolve, reject) => {
@@ -102,7 +99,7 @@
                         let likeValueEl =  $(button).find('span')
 
                         if(res.like) {
-                        likeValueEl.text(Number(likeValueEl.text()) + 1)
+                        	likeValueEl.text(Number(likeValueEl.text()) + 1)
                         } else {
                             likeValueEl.text(Number(likeValueEl.text()) - 1)
                         }
@@ -110,54 +107,96 @@
                 })
 
                 // DA O PLAY NO PODCAST QUANDO CLICADO NO CONTAINER DE EPISÓDIO
-                $(episodeEl).find('.episode-play').on('click', e => {
-                    let audio_src = episodeEl.dataset.audio_src
-
-                    changeEpisode(audio_src)
-
-                    currentEpisode = episodeEl
-                    handleEpisodeQueue(currentEpisode)
-
-                    handleEpisodeFetch('/add-view', episodeEl.dataset.episode_id).then(res => {
-                        let viewsEl = $(episodeEl).find('.episode-views span')
-
-                        viewsEl.text(Number(viewsEl.text()) + 1)
-                    }).catch(err => console.error(err))
+                $(episodeEl).find('.episode-play').on('click', e => { 
+                    changeEpisode(episodeEl)
                 })
+            })
+
+            addEventListener('audioPlayerReady', e => {
+                currentEpisode = e.detail.newCurrentEpisode
+
+                handleEpisodeQueue(currentEpisode)
+
+                handleEpisodeFetch('/add-view', $(currentEpisode).data('episode_id')).then(res => {
+                    let viewsEl = $(currentEpisode).find('.episode-views span')
+
+                    viewsEl.text(Number(viewsEl.text()) + 1)
+                }).catch(err => console.error(err))
             })
 
             // MODIFICA AS FILAS DE PRÓXIMOS E PRÉVIOS EP'S, ALÉM DE DESATIVAR OS BOTÕES CONFORMA A EXISTÊNCIA DE PRÓX. E PREV. EP'S
             function handleEpisodeQueue(ep) {
-                episodeQueue.nextEpisode = $(ep).next().length ? $(ep).next().data('audio_src') : null
-                episodeQueue.previousEpisode = $(ep).prev().length ? $(ep).prev().data('audio_src') : null
+                episodeQueue.nextEpisode = $(ep).next().length ? $(ep).next() : null
+                episodeQueue.previousEpisode = $(ep).prev().length ? $(ep).prev() : null
 
-                $('.player-next-button').attr('disabled', episodeQueue.nextEpisode == null ? true : false)
-                $('.player-previous-button').attr('disabled', episodeQueue.previousEpisode == null ? true : false)
+                $('.player-next-button').attr('disabled', (episodeQueue.nextEpisode == null))
+                $('.player-previous-button').attr('disabled', (episodeQueue.previousEpisode == null))
             }
 
             function isAlreadyPlaying() {
-                return $('.audioplayer.audioplayer-playing').length != 0
+                return audioPlayer.body.hasClass('audioplayer-playing')
             }
 
-            function changeEpisode(audio_src) {
-                isAlreadyPlaying() && $('.audioplayer-playpause').click()
-                audioplayer.attr('src') != audio_src && audioplayer.attr('src', audio_src)
-                $('.audioplayer-playpause').click()
+            function changeEpisode(episodeEl) {
+                let audio_src = $(episodeEl).data('audio_src')
+
+                // SE NENHUM EPISODIO AINDA FOI TOCADO, INICIA O PLAYER
+                if(!currentEpisode) {
+                    handlePlayerInitialization(audio_src, episodeEl)
+                } else {
+                    // MANIPULA A TROCA DE EPISÓDIOS
+                    if(audioPlayer.audio.attr('src') != audio_src) {
+                        isAlreadyPlaying() && audioPlayer.playPauseButton.click()
+                        audioPlayer.audio.attr('src', audio_src)
+
+                        dispatchEvent(new CustomEvent("audioPlayerReady", {
+                            detail: {
+                                newCurrentEpisode: episodeEl
+                            }
+                        }))
+                    }
+                }
             }
 
-            $('.player-next-button').on('click', e => {
-                changeEpisode(episodeQueue.nextEpisode)
+            function handlePlayerInitialization(audio_src, episodeEl) {
+                // ELEVA O SITE PRA CIMA
+                $('.page-container').css('padding-bottom', '80px')
+                $('#player-container').css('bottom', '0')
 
-                currentEpisode = $(currentEpisode).next().length ? $(currentEpisode).next() : currentEpisode
-                handleEpisodeQueue(currentEpisode)
-            })
+                audioEl.attr('src', audio_src)
 
-            $('.player-previous-button').on('click', e => {
-                changeEpisode(episodeQueue.previousEpisode)
+                $(function() {
+                    audioEl.audioPlayer().then(playerEl => {
+                        audioPlayer = {
+                            body: $('.audioplayer'),
+                            playPauseButton: $('.audioplayer-playpause'),
+                            audio: $('.audioplayer audio')
+                        }
 
-                currentEpisode = $(currentEpisode).prev().length ? $(currentEpisode).prev() : currentEpisode
-                handleEpisodeQueue(currentEpisode)
-            })
+                        audioPlayer.audio.on('loadeddata', e => {
+                            audioPlayer.playPauseButton.click()
+                        })
+                        
+                        $('.player-next-button').on('click', e => {
+                            changeEpisode(episodeQueue.nextEpisode)
+
+                            currentEpisode = $(currentEpisode).next().length ? $(currentEpisode).next() : currentEpisode
+                        })
+
+                        $('.player-previous-button').on('click', e => {
+                            changeEpisode(episodeQueue.previousEpisode)
+
+                            currentEpisode = $(currentEpisode).prev().length ? $(currentEpisode).prev() : currentEpisode
+                        })
+
+                        dispatchEvent(new CustomEvent("audioPlayerReady", {
+                            detail: {
+                                newCurrentEpisode: episodeEl
+                            }
+                        }))
+                    });
+                });
+            }
           })
       </script>
   </body>

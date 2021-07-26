@@ -153,9 +153,10 @@
 	<!-- COMPONENTE DO PLAYER DA PÁGINA -->
 	<div th:fragment="player" id="player-container">
        <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="" id='player-cover'>
+       <!-- <img th:if="${cover}" th:src="${cover}" /> -->
 
        <div id="player-controller">
-           <audio src="void.mp3" preload="auto"></audio>
+           <audio src="" preload="auto"></audio>
        </div>
     </div>
 
