@@ -19,4 +19,6 @@ public interface ReactionsDao extends JpaRepository<Reactions, Integer> {
 	
 	@Transactional
 	public void deleteByEpisode(Episodes episode);
+	
+	public List<Reactions> findAllByUser(Users user);
 }

@@ -14,6 +14,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		
 		if (request.getSession().getAttribute("usuarioLogado") == null) {
 			request.getRequestDispatcher("/acessoNegado").forward(request, response);
+
 			return false;
 		} else {
 			return true;

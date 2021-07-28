@@ -27,6 +27,8 @@
     	<link rel="stylesheet" th:href="|/styles/${page}.css|">
         <!-- audio player css -->
         <link rel="stylesheet" href="/player/css/audioplayer.css">
+        <!-- toast css -->
+        <link rel="stylesheet" href="/toast/jquery.toast.css">
     </th:block>
 </head>
 <body>
@@ -177,6 +179,10 @@
         <th:block th:if="${page} != 'login' and ${page} != 'register'">
             <!-- audio player js -->
             <script src="/player/js/audioplayer.js"></script>
+            <!-- toast js -->
+            <script src="/toast/jquery.toast.js"></script>
+            <!-- fetch level verification -->
+            <script src="/levelVerification.js"></script>
         </th:block>
     </th:block>
 </body>

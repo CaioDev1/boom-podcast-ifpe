@@ -1,10 +1,10 @@
 package com.boompodcast.usuarios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// Data Access Object 
+@Repository
 public interface UsersDAO extends JpaRepository<Users, Integer>{
-
-	// select * from usuario where login = ... and senha = ...
+	
 	public Users findByEmailAndPassword(String email, String password);
 }

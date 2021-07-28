@@ -10,7 +10,6 @@ public class AcessoConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new AdminInterceptor())
-			.addPathPatterns(new String[]{"/adm", "/adm/*"});
-		
+			.addPathPatterns(new String[]{"/adm", "/adm/*"});		
 	}
 }
