@@ -2,18 +2,14 @@ package com.boompodcast.usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import com.boompodcast.acesso.Access;
 import com.boompodcast.levels.Levels;
 
 @Entity @DynamicInsert
@@ -27,9 +23,12 @@ public class Users {
 	private String email;
 	@Column(length = 100)
 	private String password;
-	@Enumerated(EnumType.STRING)
-	@ColumnDefault("'ADMIN'")
-	private Access access;
+	/*
+	 * @Enumerated(EnumType.STRING)
+	 * 
+	 * @ColumnDefault("'ADMIN'")
+	 */
+	//private Access access;
 	@ManyToOne
 	@JoinColumn(name = "level_id", columnDefinition = "integer default 1")
 	private Levels level; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
@@ -64,15 +63,9 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Access getAccess() {
-		return access;
-	}
-	public void setAccess(Access access) {
-		this.access = access;
-	}
+
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", access="
-				+ access + ", level=" + level + "]";
+		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ",  level=" + level + "]";
 	}
 }

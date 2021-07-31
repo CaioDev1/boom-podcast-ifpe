@@ -49,23 +49,6 @@ public class Categories {
 	public void setTotal_views(Integer total_views) {
 		this.total_views = total_views;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Categories other = (Categories) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
 	
 	@Override
 	public String toString() {

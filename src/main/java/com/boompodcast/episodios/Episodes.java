@@ -2,6 +2,7 @@ package com.boompodcast.episodios;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,14 +24,16 @@ public class Episodes {
 	private Integer id;
 	private String title;
 	@CreationTimestamp
-	private Date created_at; // OFFSETDATETIME TROCADO POR DATE E COLOCADO @CREATIONTIMESTAMP
+	@Column(name = "created_at")
+	private Date createdAt; // OFFSETDATETIME TROCADO POR DATE E COLOCADO @CREATIONTIMESTAMP
 	private Integer duration;
     @ManyToOne
     @JoinColumn(name = "podcast_id", nullable = false)
 	private Podcasts podcast;
 	private String audio;
 	@ColumnDefault("0")
-	private Integer reactions_value;
+	@Column(name = "reactions_value")
+	private Integer reactionsValue;
 	@ColumnDefault("0")
 	private Integer views;
 
@@ -55,13 +58,13 @@ public class Episodes {
 	}
 
 
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
 
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 
@@ -94,12 +97,12 @@ public class Episodes {
 		this.audio = audio;
 	}
 	
-	public Integer getReactions_value() {
-		return reactions_value;
+	public Integer getReactionsValue() {
+		return reactionsValue;
 	}
 	
-	public void setReactions_value(Integer reactions_value) {
-		this.reactions_value = reactions_value;
+	public void setReactionsValue(Integer reactionsValue) {
+		this.reactionsValue = reactionsValue;
 	}
 
 	public Integer getViews() {
@@ -131,8 +134,8 @@ public class Episodes {
 
 	@Override
 	public String toString() {
-		return "Episodes [id=" + id + ", title=" + title + ", created_at=" + created_at + ", duration=" + duration
-				+ ", podcast=" + podcast + ", audio=" + audio + ", reactions_value=" + reactions_value + ", views="
+		return "Episodes [id=" + id + ", title=" + title + ", createdAt=" + createdAt + ", duration=" + duration
+				+ ", podcast=" + podcast + ", audio=" + audio + ", reactionsValue=" + reactionsValue + ", views="
 				+ views + "]";
 	}
 }

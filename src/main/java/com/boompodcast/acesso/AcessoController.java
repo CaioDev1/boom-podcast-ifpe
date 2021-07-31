@@ -1,5 +1,6 @@
 package com.boompodcast.acesso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import com.boompodcast.categorias.Categories;
 import com.boompodcast.categorias.CategoriesDao;
 import com.boompodcast.episodios.Episodes;
 import com.boompodcast.episodios.EpisodesDao;
+import com.boompodcast.episodios.ProjectPodcast;
 import com.boompodcast.podcasts.PodcastDao;
+import com.boompodcast.podcasts.PodcastRow;
 import com.boompodcast.podcasts.Podcasts;
 import com.boompodcast.reacoes.ReactionsDao;
 import com.boompodcast.reacoes.ReactionsUtils;
@@ -43,18 +46,32 @@ public class AcessoController {
 		model.addAttribute("page", "login");
 		return "login";
 	}
+	 
 	@GetMapping("/")
 	public String cadastro(Model model) {
 		model.addAttribute("page", "register");
 		
 		return "register";
 	}
+	
 	@GetMapping("/adm/home")
 	public String home(Model model) {
 		model.addAttribute("page", "home");
 		
+		List<ProjectPodcast> mostViewedPodcasts = this.episodesDao.findDistinctTop15ByOrderByViewsDesc();
+		List<ProjectPodcast> mostRecentPodcasts = this.episodesDao.findDistinctTop15ByOrderByCreatedAtDesc();
+		List<ProjectPodcast> mostLikedPodcasts = this.episodesDao.findDistinctTop15ByOrderByReactionsValueDesc();
+
+		List<PodcastRow> podcastRows = new ArrayList<PodcastRow>();
+		podcastRows.add(new PodcastRow("Mais visualizados", mostViewedPodcasts));
+		podcastRows.add(new PodcastRow("Episódios mais recentes", mostRecentPodcasts));
+		podcastRows.add(new PodcastRow("Podcasts mais curtidos", mostLikedPodcasts));
+		
+		model.addAttribute("podcastRows", podcastRows);
+		
 		return "home";
 	}
+	
 	@GetMapping("/adm/usuario")
 	public String usuario(Model model, HttpServletRequest request) {
 		List<Categories> categories = this.categoriesDao.findAll();

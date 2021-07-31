@@ -7,6 +7,10 @@
     <div class="page-container">
         <th:block th:replace="components :: header"></th:block>
         <main class="content">
+        	<th:block th:each="row : ${podcastRows}">
+        		<th:block th:replace="components :: podcast-row(${row})"></th:block>
+        	</th:block>
+        	
             <div class="podcast-list">
                 <h1 class="podcast-list-title text-white">Mais ouvidos</h1>
                 
@@ -14,7 +18,7 @@
                     <a href='/adm/podcast' class="podcast-item">
                         <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="">
                     </a>
-                    <a href='/adm/podcast' class="podcast-item">
+                    <!-- <a href='/adm/podcast' class="podcast-item">
                         <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/fotojet-2021-03-22t161206-509-6058ec1c24e36.webp' />
                     </a>
                     <a href='/adm/podcast' class="podcast-item">
@@ -28,12 +32,12 @@
                     </a>
                     <a href='/adm/podcast' class="podcast-item">
                         <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/aaa-5e56bd458936e.jpg' />
-                    </a>
+                    </a> -->
                 </div>
             </div>
 
             <div class="podcast-list">
-                <h1 class="podcast-list-title text-white">Lançamentos</h1>
+                <h1 class="podcast-list-title text-white">Últimos lançamentos</h1>
 
                 <div class="podcasts-row-container">
                     <a href='/adm/podcast' class="podcast-item">
@@ -59,37 +63,39 @@
     <th:block th:replace="components :: player"></th:block>
   	<th:block th:replace="components :: scripts(${page})"></th:block>
     <script>
-        $('.podcasts-row-container').slick({
-            autoplay: true,
-            dots: false,
-            infinite: true,
-            speed: 500,
-            mobileFirst: false,
-            slidesToShow: 4,
-            slidesToScroll: 2,
-            responsive: [
-                {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-                },
-                {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-                },
-            ]
-        });
+    	$(document).ready(() => {
+            $('.podcasts-row-container').slick({
+                autoplay: true,
+                dots: false,
+                infinite: true,
+                speed: 500,
+                mobileFirst: false,
+                slidesToShow: 4,
+                slidesToScroll: 2,
+                responsive: [
+                    {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                    },
+                    {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                    },
+                ]
+            });
 
-        $('.podcasts-row-container').slick('slickSetOption', 'mobileFirst', false, true);
+            $('.podcasts-row-container').slick('slickSetOption', 'mobileFirst', false, true);
 
-        $(function() {
-            $('audio').audioPlayer();
-        });
+            $(function() {
+                $('audio').audioPlayer();
+            });
+    	})
     </script>
 </body>
 </html>

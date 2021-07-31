@@ -18,14 +18,20 @@ public interface EpisodesDao extends JpaRepository<Episodes, Integer> {
 	
 	public Integer countByPodcastIn(List<Podcasts> podcasts);
 	
+	public List<ProjectPodcast> findDistinctTop15ByOrderByViewsDesc();
+
+	public List<ProjectPodcast> findDistinctTop15ByOrderByCreatedAtDesc();
+	
+	public List<ProjectPodcast> findDistinctTop15ByOrderByReactionsValueDesc();
+	
 	@Transactional
 	@Modifying
-	@Query("UPDATE Episodes t SET t.reactions_value = t.reactions_value + 1 WHERE t.id = :episodeId")
+	@Query("UPDATE Episodes t SET t.reactionsValue = t.reactionsValue + 1 WHERE t.id = :episodeId")
 	public void incrementEpisodeReactions(@Param("episodeId") Integer episodeId);
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE Episodes t SET t.reactions_value = t.reactions_value - 1 WHERE t.id = :episodeId")
+	@Query("UPDATE Episodes t SET t.reactionsValue = t.reactionsValue - 1 WHERE t.id = :episodeId")
 	public void decrementEpisodeReactions(@Param("episodeId") Integer episodeId);
 	
 	@Transactional

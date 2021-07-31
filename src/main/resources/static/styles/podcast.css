@@ -94,6 +94,10 @@ main {
                     .episode-header h1 {
                         font-size: 1.5rem;
                     }
+                    
+                .episode-reactions > * {
+                	margin-left: 10px;
+                }
                 
                 .episode-views svg, .episode-reactions svg {
                     margin-right: 5px;

@@ -55,9 +55,21 @@
                 return ret;
             }
             
+            function formatDate(elDate) {
+				console.log(elDate)
+            	let date = new Date(elDate);
+            	let formatedDate = ((date.getDate() )) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear();
+            	
+            	return formatedDate
+            }
+            
             $('.episode-duration').map((i, el) => {
                 el.textContent = format(el.textContent)
             });
+            
+            $('.episode-date').map((i, el) => {
+				el.textContent = formatDate(el.textContent)
+            })
             
 
             let currentEpisode
