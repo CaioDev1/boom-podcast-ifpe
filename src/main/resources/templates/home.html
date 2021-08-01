@@ -60,41 +60,45 @@
         </main>
     </div>
     
-    <th:block th:replace="components :: player"></th:block>
   	<th:block th:replace="components :: scripts(${page})"></th:block>
     <script>
     	$(document).ready(() => {
-            $('.podcasts-row-container').slick({
+            let carousel = $('.podcasts-row-container').slick({
+				centerMode: true,
                 autoplay: true,
                 dots: false,
                 infinite: true,
                 speed: 500,
                 mobileFirst: false,
-                slidesToShow: 4,
-                slidesToScroll: 2,
                 responsive: [
                     {
-                    breakpoint: 1024,
+                    breakpoint: 9999,
                     settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                    },
+                    {
+                    breakpoint: 1100,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
                     }
                     },
                     {
                     breakpoint: 600,
                     settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 2
                     }
                     },
                 ]
             });
+			
+            console.log(carousel)
 
-            $('.podcasts-row-container').slick('slickSetOption', 'mobileFirst', false, true);
-
-            $(function() {
-                $('audio').audioPlayer();
-            });
+            carousel.slick('slickSetOption', 'speed', 600, true);
+            
     	})
     </script>
 </body>
