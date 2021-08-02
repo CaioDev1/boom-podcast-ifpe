@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="www.thymeleaf.org">
+<head th:replace="components :: head(${page}, ~{::meta})">
+  <meta charset="UTF-8">
+</head>
+<body>
+    <div class="page-container">
+        <th:block th:replace="components :: header"></th:block>
+        <main>
+            <div id="categories-header">
+                <h1 th:text="${categorie.getName()}"></h1>
+
+                <div id="header-info">
+                    <div class="header-info-item">
+                        <h2 class="my-0">Número de podcasts: <strong th:text="${categorie.getNumberPodcasts()}"></strong></h2>
+                    </div>
+                    <div class="header-info-item">
+                        <h2 class="my-0">Total de views: <strong th:text="${categorie.getTotalViews()}"></strong></h2>
+                    </div>
+                </div>
+            </div>
+            <div id="categorie-podcast-list">
+            	<th:block th:each="pdc : ${podcasts}">
+            		<th:block th:replace="components :: categorie-pdc(${pdc})"></th:block>
+            	</th:block>
+            </div>
+        </main>
+        <th:block th:replace="components :: scripts(${page})"></th:block>
+    </div>
+</body>
+</html>

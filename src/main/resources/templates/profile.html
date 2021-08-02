@@ -88,13 +88,8 @@
       </div>
 	</div>
 	
-    <th:block th:replace="components :: player"></th:block>
 	<th:block th:replace="components :: scripts(${page})"></th:block>
     <script>
-        /* $(function() {
-            $('audio').audioPlayer();
-        }); */
-
         $('#select-cover').click(e => {
             $('#cover-input').click()
         })

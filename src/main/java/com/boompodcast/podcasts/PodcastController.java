@@ -44,6 +44,8 @@ public class PodcastController {
 				podcast.setCover(cover_file_url);
 				
 				this.podcastDao.save(podcast);
+				
+				this.categoriesDao.incrementNumberPodcasts(c.getId());
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

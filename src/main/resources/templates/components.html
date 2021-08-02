@@ -92,7 +92,16 @@
              <li class="nav-item"><a href="#" class="nav-link text-warning">Esportes</a></li>
              <li class="nav-item"><a href="#" class="nav-link text-warning">Política</a></li>
              <li class="nav-item"><a href="#" class="nav-link text-warning">Comédia</a></li>
-             <li class="nav-item"><a href="#" class="nav-link text-warning">Mais escutados</a></li>
+             <div class="dropdown">
+                <button class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mais categorias
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
          </ul>
          <a href="/adm/usuario">
              <svg id="people-circle" viewBox="0 0 16 16">
@@ -106,13 +115,12 @@
     <div th:fragment="podcast-row(row)" class="podcast-list">
         <h1 class="podcast-list-title text-white" th:text="${row.rowTitle}"></h1>
         
-        <div class="podcasts-row-container" th:each="pdc : ${row.podcasts}">
-            <a th:href='|/adm/podcast/${pdc.getPodcast().getId()}|' class="podcast-item">
-                <img th:src="${pdc.getPodcast().getCover()}" alt="pdc-img" />
-            </a>
-            <a th:href='|/adm/podcast/${pdc.getPodcast().getId()}|' class="podcast-item">
-                <img th:src="${pdc.getPodcast().getCover()}" alt="pdc-img" />
-            </a>
+        <div class="podcasts-row-container">
+            <th:block th:each="pdc : ${row.podcasts}">
+                <a th:href='|/adm/podcast/${pdc.getPodcast().getId()}|' class="podcast-item">
+                    <img th:src="${pdc.getPodcast().getCover()}" alt="pdc-img" />
+                </a>
+            </th:block>
         </div>
     </div>
        
@@ -166,12 +174,42 @@
              <span th:style="${'background-color:' + user.level.color + ';'}" th:text="${user.level.description}"></span>
          </div>
      </div>
+     
+     <a th:fragment="categorie-pdc(pdc)" th:href="|/adm/podcast/${pdc.getId()}|" class="categorie-podcast-item">
+         <div class="podcast-item-body">
+             <div class="podcast-photo">
+                 <img th:src="${pdc.getCover()}" alt="pdc-img">
+             </div>
+             <div class="podcast-info">
+                 <h1 class="podcast-title" th:text="${pdc.getName()}"></h1>
+                 <p class="podcast-description" th:text="${pdc.getDescription()}"></p>
+             </div>
+         </div>
+         <div class="podcast-creator">
+             <div class="creator-name">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                     <defs id="defs3051">
+                       <style type="text/css" id="current-color-scheme">
+                         .ColorScheme-Text {
+                           color:#4d4d4d;
+                         }
+                         </style>
+                     </defs>
+                    <path style="fill: currentcolor; fill-opacity: 1; stroke: none; --darkreader-inline-fill:currentcolor; --darkreader-inline-stroke:none;" d="M 11 3 A 3.9999902 4.0000296 0 0 0 7 7 A 3.9999902 4.0000296 0 0 0 11 11 A 3.9999902 4.0000296 0 0 0 15 7 A 3.9999902 4.0000296 0 0 0 11 3 z M 11 4 A 3 3.0000296 0 0 1 14 7 A 3 3.0000296 0 0 1 11 10 A 3 3.0000296 0 0 1 8 7 A 3 3.0000296 0 0 1 11 4 z M 11 12 A 7.9999504 8.0000296 0 0 0 3.0722656 19 L 4.0800781 19 A 6.9999604 7.0000296 0 0 1 11 13 A 6.9999604 7.0000296 0 0 1 17.921875 19 L 18.929688 19 A 7.9999504 8.0000296 0 0 0 11 12 z " class="ColorScheme-Text" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""></path>
+                 </svg>
+
+                 <span th:text="${pdc.getUser().getName()}"></span>
+             </div>
+             <div class="creator-level" th:style="${'background-color:' + pdc.getUser().getLevel().getColor() + ';'}">
+                 <span class="level-description" th:text="${pdc.getUser().getLevel().getDescription()}"></span>
+             </div>
+         </div>
+     </a>
 
 
 	<!-- COMPONENTE DO PLAYER DA PÁGINA -->
 	<div th:fragment="player" id="player-container">
        <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="" id='player-cover'>
-       <!-- <img th:if="${cover}" th:src="${cover}" /> -->
 
        <div id="player-controller">
            <audio src="" preload="auto"></audio>
@@ -180,8 +218,8 @@
 
 	<!-- COMPONENTE DE SCRIPTS DA PÁGINA  -->
     <th:block th:fragment="scripts(page)">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
         <th:block th:if="${page} == 'home'">
             <!-- slick js -->

@@ -1,0 +1,135 @@
+main {
+    padding: 0 5% 5%;
+}
+
+#categories-header {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+    #header-info {
+        display: flex;
+    }
+
+        .header-info-item {
+            background: #ffc107;
+
+            border-radius: 100px;
+
+            padding: 5px 15px;
+
+            margin-left: 15px;
+        }
+
+            .header-info-item h2 {
+                font-size: 1rem;
+
+                color: white;
+            }
+
+#categorie-podcast-list {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.categorie-podcast-item {
+
+    text-decoration: none;
+
+    padding: 10px;
+
+    max-width: 700px;
+    width: 70%;
+
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+}
+
+    .categorie-podcast-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .categorie-podcast-item:hover {
+        border-color: white;
+    }
+
+    .podcast-item-body {
+        display: flex;
+    }
+
+    .podcast-photo {
+        min-height: 100px;
+        min-width: 100px;
+        max-height: 100px;
+        max-width: 100px;
+
+        margin-right: 40px;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+    }
+
+        .podcast-photo img {
+            height: 100%;
+            width: 100%;
+        }
+
+    .podcast-info {
+        width: 100%;
+    }
+
+    .podcast-creator {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+        .creator-name {
+            background: white;
+
+            border-radius: 50px;
+
+            padding: 3px 10px;
+            
+            margin-top: 5px;
+
+            color: #181a1c;
+        }
+
+            .creator-name svg {
+                height: 20px;
+                width: 20px;
+            }
+
+        .creator-level {
+            border-radius: 50px;
+            padding: 3px 10px;
+
+            color: white;
+            
+            margin-top: 5px;
+
+            margin-left: 5px;
+        }
+
+@media screen and (max-width: 450px) {
+    .podcast-item-body {
+        flex-direction: column;
+    }
+
+    .categorie-podcast-item {
+        width: 100%;
+    }
+}

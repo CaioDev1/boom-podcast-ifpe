@@ -10,96 +10,73 @@
         	<th:block th:each="row : ${podcastRows}">
         		<th:block th:replace="components :: podcast-row(${row})"></th:block>
         	</th:block>
-        	
-            <div class="podcast-list">
-                <h1 class="podcast-list-title text-white">Mais ouvidos</h1>
-                
-                <div class="podcasts-row-container">
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="">
-                    </a>
-                    <!-- <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/fotojet-2021-03-22t161206-509-6058ec1c24e36.webp' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/clipboard01-5e56bb38193c2.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/asasasa-5e56bcef1ad24.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/333bd0495660bf2d2815a367e1c4172079eaa0a9-5e56bcbc9da19.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/aaa-5e56bd458936e.jpg' />
-                    </a> -->
-                </div>
-            </div>
-
-            <div class="podcast-list">
-                <h1 class="podcast-list-title text-white">Últimos lançamentos</h1>
-
-                <div class="podcasts-row-container">
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/600x600bb-1-5e56bca9d4fbf.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/53109632-549692668872963-6089670409751436547-n-5e74bfd65f32d.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/gdfg-5e74c2be3117e.jpg' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/1200x1200bb-6058ee2b975ff.webp' />
-                    </a>
-                    <a href='/adm/podcast' class="podcast-item">
-                        <img src='https://zinecultural.s3.amazonaws.com/site/uploads/mlib-uploads/full/43725627de7f108736565b79beb6d1623ea48346-6058f7f75db67.webp' />
-                    </a>
-                </div>
-            </div>
         </main>
     </div>
     
   	<th:block th:replace="components :: scripts(${page})"></th:block>
     <script>
-    	$(document).ready(() => {
-            let carousel = $('.podcasts-row-container').slick({
-				centerMode: true,
-                autoplay: true,
-                dots: false,
-                infinite: true,
-                speed: 500,
-                mobileFirst: false,
-                responsive: [
-                    {
-                    breakpoint: 9999,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
-                    }
-                    },
-                    {
-                    breakpoint: 1100,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                    }
-                    },
-                    {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 2
-                    }
-                    },
-                ]
-            });
-			
-            console.log(carousel)
+        $(document).ready(() => {
+            function handleWindowResizeCaroulse() {
+                $('.podcasts-row-container').map((i, pdcRow) => {
+                    let itemsTotalWidth = 0;
 
-            carousel.slick('slickSetOption', 'speed', 600, true);
-            
-    	})
+                    $(pdcRow).children().map((i, pdcItem) => {
+                        itemsTotalWidth += pdcItem.clientWidth + 30 // margin-right
+                    })
+
+                    if(itemsTotalWidth > pdcRow.clientWidth && !$(pdcRow).hasClass('slick-initialized')) {
+                        $(pdcRow).slick({
+                            autoplay: true,
+                            dots: false,
+                            infinite: true,
+                            speed: 500,
+                            mobileFirst: false,
+                            responsive: [
+                                {
+                                breakpoint: 9999,
+                                settings: {
+                                    slidesToShow: 5,
+                                    slidesToScroll: 3,
+                                }
+                                },
+                                {
+                                breakpoint: 1300,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 2,
+                                }
+                                },
+                                {
+                                breakpoint: 900,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1
+                                }
+                                },
+                                {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    centerMode: true
+                                }
+                                },
+                            ]
+                        })
+                    } else if(itemsTotalWidth <= pdcRow.clientWidth && $(pdcRow).hasClass('slick-initialized')) { 
+                        try {
+                            $(pdcRow).slick('unslick') 
+                        } catch(e) {
+                            return
+                        }
+                    }
+                })
+            }
+
+            handleWindowResizeCaroulse()
+
+            window.addEventListener('resize', handleWindowResizeCaroulse)
+        })
     </script>
 </body>
 </html>

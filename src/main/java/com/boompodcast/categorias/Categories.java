@@ -1,5 +1,6 @@
 package com.boompodcast.categorias;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +15,11 @@ public class Categories {
 	private Integer id;
 	private String name;
 	@ColumnDefault("0")
-	private Integer number_podcasts;
+	@Column(name = "number_podcasts")
+	private Integer numberPodcasts;
 	@ColumnDefault("0")
-	private Integer total_views;
+	@Column(name = "total_views")
+	private Integer totalViews;
 
 	public Integer getId() {
 		return id;
@@ -34,25 +37,25 @@ public class Categories {
 		this.name = name;
 	}
 
-	public Integer getNumber_podcasts() {
-		return number_podcasts;
+	public Integer getNumberPodcasts() {
+		return numberPodcasts;
 	}
 
-	public void setNumber_podcasts(Integer number_podcasts) {
-		this.number_podcasts = number_podcasts;
+	public void setNumber_podcasts(Integer numberPodcasts) {
+		this.numberPodcasts = numberPodcasts;
 	}
 
-	public Integer getTotal_views() {
-		return total_views;
+	public Integer getTotalViews() {
+		return totalViews;
 	}
 
-	public void setTotal_views(Integer total_views) {
-		this.total_views = total_views;
+	public void setTotalViews(Integer totalViews) {
+		this.totalViews = totalViews;
 	}
 	
 	@Override
 	public String toString() {
-		return "Categories [id=" + id + ", name=" + name + ", number_podcasts=" + number_podcasts + ", total_views="
-				+ total_views + "]";
+		return "Categories [id=" + id + ", name=" + name + ", numberPodcasts=" + numberPodcasts + ", totalViews="
+				+ totalViews + "]";
 	}
 }

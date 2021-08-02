@@ -16,13 +16,16 @@
 
         height: 250px;
         width: 100%;
+        
+        overflow: hidden;
     }
 
         .podcast-item {
             background-color: yellow;
 
-            height: 100%;
-            /*max-width: 200px;*/
+            height: 200px;
+            min-width: 200px;
+            max-width: 200px;
 
             margin-right: 30px;
 
@@ -41,3 +44,13 @@
 
                 object-fit: cover;
             }
+
+.slick-prev:before {
+    position: relative;
+    left: 25px;
+}
+
+.slick-next:before {
+    position: relative;
+    right: 25px;
+}

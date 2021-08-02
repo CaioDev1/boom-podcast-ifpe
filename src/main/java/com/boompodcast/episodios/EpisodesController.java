@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.boompodcast.categorias.CategoriesDao;
 import com.boompodcast.podcasts.PodcastDao;
 import com.boompodcast.podcasts.Podcasts;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,8 @@ public class EpisodesController {
 	EpisodesDao episodesDao;
 	@Autowired
 	PodcastDao podcastDao;
+	@Autowired
+	CategoriesDao categoriesDao;
 	
 	@PostMapping("/add-episode")
 	public String salvarEpisodio(Episodes episode, @RequestParam("form_audio_file") MultipartFile form_audio_file,
@@ -50,8 +53,12 @@ public class EpisodesController {
 	}
 	
 	@PostMapping("/add-view")
-	public ResponseEntity<Object> incrementEpisodeView(Integer form_episode_id) {		
-		this.episodesDao.incrementViews(form_episode_id);
+	public ResponseEntity<Object> incrementEpisodeView(Integer form_episode_id) {
+		Episodes episode = this.episodesDao.getOne(form_episode_id);
+		
+		this.episodesDao.incrementViews(episode.getId());
+		
+		this.categoriesDao.incrementTotalViews(episode.getPodcast().getCategories().getId());
 		
 		ObjectNode response = new ObjectMapper().createObjectNode();
 		response.put("result", "View added successfully.");

@@ -107,6 +107,19 @@ public class AcessoController {
 		
 		return "podcast";
 	}
+	
+	@GetMapping("/adm/categories/{categorie_id}")
+	public String categorie(Model model, @PathVariable Integer categorie_id) {
+		model.addAttribute("page", "categories");
+		
+		Categories categorie = this.categoriesDao.getOne(categorie_id);
+		List<Podcasts> podcastsByCategorie = this.podcastsDao.findAllByCategories(categorie);
+		
+		model.addAttribute("categorie", categorie);
+		model.addAttribute("podcasts", podcastsByCategorie);
+		
+		return "categories";
+	}
 		
 	@PostMapping("/login")
 	public String efetuarLogin(String email, String password, HttpSession session, RedirectAttributes ra) {

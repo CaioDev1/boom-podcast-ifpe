@@ -23,15 +23,9 @@ public class Users {
 	private String email;
 	@Column(length = 100)
 	private String password;
-	/*
-	 * @Enumerated(EnumType.STRING)
-	 * 
-	 * @ColumnDefault("'ADMIN'")
-	 */
-	//private Access access;
 	@ManyToOne
 	@JoinColumn(name = "level_id", columnDefinition = "integer default 1")
-	private Levels level; // ADICIONAR UM "DEFAULT" DE LEVEL NO BANCO PRA O LVL 1
+	private Levels level;
 	
 	public Levels getLevel() {
 		return level;

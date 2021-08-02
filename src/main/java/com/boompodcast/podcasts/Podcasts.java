@@ -18,7 +18,6 @@ public class Podcasts {
 	private String cover;
 	@ManyToOne
 	@JoinColumn(name = "categories_id", nullable = false)
-	//@Convert(converter = CategoriesConverter.class)  // TIRAR????
 	private Categories categories;
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
