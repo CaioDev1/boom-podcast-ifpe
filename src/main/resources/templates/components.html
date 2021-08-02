@@ -89,17 +89,17 @@
          </a>
          <ul class="nav nav-pills mx-4">
              <li class="nav-item"><a href="/adm/home" class="btn btn-warning" aria-current="page">Home</a></li>
-             <li class="nav-item"><a href="#" class="nav-link text-warning">Esportes</a></li>
-             <li class="nav-item"><a href="#" class="nav-link text-warning">Política</a></li>
-             <li class="nav-item"><a href="#" class="nav-link text-warning">Comédia</a></li>
+             <li class="nav-item"><a th:href="|/adm/categories/${default_categories[0].getId()}|" class="nav-link text-warning" th:text="${#strings.capitalize(default_categories[0].getName())}"></a></li>
+             <li class="nav-item"><a th:href="|/adm/categories/${default_categories[1].getId()}|" class="nav-link text-warning" th:text="${#strings.capitalize(default_categories[1].getName())}"></a></li>
+             <li class="nav-item"><a th:href="|/adm/categories/${default_categories[2].getId()}|" class="nav-link text-warning" th:text="${#strings.capitalize(default_categories[2].getName())}"></a></li>
              <div class="dropdown">
                 <button class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Mais categorias
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li th:each="c, iter : ${default_categories}">
+                  	<a th:if="${iter.index > 2}" class="dropdown-item" th:href="|/adm/categories/${c.getId()}|" th:text="${#strings.capitalize(c.getName())}"></a>
+                  </li>
                 </ul>
               </div>
          </ul>

@@ -1,6 +1,18 @@
 .page-container {
     height: 100%;
 }
+	
+	.podcast-list-title {
+		background-color: #ffc107;
+		
+		padding: 0px 25px;
+		
+		border-radius: 10px;
+		
+		width: fit-content;
+		
+		border: 2px solid white;
+	}
 
     .podcast-list {
         padding: 0 3%;

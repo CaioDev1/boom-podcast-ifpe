@@ -3,6 +3,7 @@ package com.boompodcast.acesso;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +41,12 @@ public class AcessoController {
 	private EpisodesDao episodesDao;
 	@Autowired
 	private ReactionsDao reactionsDao;
+	private List<Categories> categoriesList;
+	
+	@PostConstruct
+	public void getCategories() {
+		categoriesList = this.categoriesDao.findAll();
+	}
 	
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -57,6 +64,7 @@ public class AcessoController {
 	@GetMapping("/adm/home")
 	public String home(Model model) {
 		model.addAttribute("page", "home");
+		model.addAttribute("default_categories", categoriesList);
 		
 		List<ProjectPodcast> mostViewedPodcasts = this.episodesDao.findDistinctTop15ByOrderByViewsDesc();
 		List<ProjectPodcast> mostRecentPodcasts = this.episodesDao.findDistinctTop15ByOrderByCreatedAtDesc();
@@ -83,6 +91,7 @@ public class AcessoController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("user_podcasts", user_podcasts);
 		model.addAttribute("user", usuarioLogado);
+		model.addAttribute("default_categories", categoriesList);
 		
 		return "profile";
 	}
@@ -104,6 +113,7 @@ public class AcessoController {
 		model.addAttribute("episodes", episodes);
 		model.addAttribute("user", podcastOwner);
 		model.addAttribute("user_reactions", reactionsIdList);
+		model.addAttribute("default_categories", categoriesList);
 		
 		return "podcast";
 	}
@@ -111,6 +121,7 @@ public class AcessoController {
 	@GetMapping("/adm/categories/{categorie_id}")
 	public String categorie(Model model, @PathVariable Integer categorie_id) {
 		model.addAttribute("page", "categories");
+		model.addAttribute("default_categories", categoriesList);
 		
 		Categories categorie = this.categoriesDao.getOne(categorie_id);
 		List<Podcasts> podcastsByCategorie = this.podcastsDao.findAllByCategories(categorie);

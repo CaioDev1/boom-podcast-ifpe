@@ -8,7 +8,7 @@
         <th:block th:replace="components :: header"></th:block>
         <main>
             <div id="categories-header">
-                <h1 th:text="${categorie.getName()}"></h1>
+                <h1 th:text="${#strings.capitalize(categorie.getName())}"></h1>
 
                 <div id="header-info">
                     <div class="header-info-item">
