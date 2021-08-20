@@ -20,6 +20,8 @@ import com.boompodcast.categorias.CategoriesDao;
 import com.boompodcast.episodios.Episodes;
 import com.boompodcast.episodios.EpisodesDao;
 import com.boompodcast.episodios.ProjectPodcast;
+import com.boompodcast.levels.Levels;
+import com.boompodcast.levels.LevelsDao;
 import com.boompodcast.podcasts.PodcastDao;
 import com.boompodcast.podcasts.PodcastRow;
 import com.boompodcast.podcasts.Podcasts;
@@ -41,11 +43,15 @@ public class AcessoController {
 	private EpisodesDao episodesDao;
 	@Autowired
 	private ReactionsDao reactionsDao;
+	@Autowired
+	private LevelsDao levelsDao;
 	private List<Categories> categoriesList;
+	private List<Levels> levelsList;
 	
 	@PostConstruct
 	public void getCategories() {
 		categoriesList = this.categoriesDao.findAll();
+		levelsList = this.levelsDao.findAll();
 	}
 	
 	@GetMapping("/login")
@@ -82,16 +88,15 @@ public class AcessoController {
 	
 	@GetMapping("/adm/usuario")
 	public String usuario(Model model, HttpServletRequest request) {
-		List<Categories> categories = this.categoriesDao.findAll();
-		
 		Users usuarioLogado = (Users)request.getSession().getAttribute("usuarioLogado");
 		List<Podcasts> user_podcasts = this.podcastsDao.findAllByUser(usuarioLogado);
 		
 		model.addAttribute("page", "profile");
-		model.addAttribute("categories", categories);
+		model.addAttribute("categories", categoriesList);
 		model.addAttribute("user_podcasts", user_podcasts);
 		model.addAttribute("user", usuarioLogado);
 		model.addAttribute("default_categories", categoriesList);
+		model.addAttribute("levels", levelsList);
 		
 		return "profile";
 	}
@@ -114,6 +119,7 @@ public class AcessoController {
 		model.addAttribute("user", podcastOwner);
 		model.addAttribute("user_reactions", reactionsIdList);
 		model.addAttribute("default_categories", categoriesList);
+		model.addAttribute("levels", levelsList);
 		
 		return "podcast";
 	}

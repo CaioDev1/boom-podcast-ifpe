@@ -34,6 +34,8 @@ h1, h2, h3, h4, h5, h6, p {
     
     justify-content: center;
     align-items: center;
+    
+    z-index: 5;
 
     transition: bottom 0.3s ease-in-out;
 }
@@ -118,6 +120,8 @@ h1, h2, h3, h4, h5, h6, p {
     flex-wrap: wrap;
 
     text-align: center;
+
+    position: relative;
 }
 
  #user-photo {
@@ -143,10 +147,14 @@ h1, h2, h3, h4, h5, h6, p {
          
          height: 100%;
 
+         z-index: -1;
+
          opacity: 0.09;
      }
 
      #user-info {
+     	 display: flex;
+     	 flex-direction: column;
          background-color: darkgray;
          border-radius: 10px;
 
@@ -171,3 +179,117 @@ h1, h2, h3, h4, h5, h6, p {
      	 	font-size: 1rem;
 
      	 }
+     	 
+     	 #user-info button {
+     	 	font-size: 1rem;
+     	 	
+     	 	margin-top: 10px;
+     	 }
+    
+    #level-info-container {
+        position: fixed;
+
+        top: 5%;
+        transform: translateX(-50%);
+        left: 50%;
+
+        width: 400px;
+        max-height: 500px;
+        
+        overflow-y: scroll;
+
+        background-color: gray;
+
+        border-radius: 20px;
+        
+        padding: 10px 20px;
+        
+        border: 2px solid darkgray;
+
+        display: none;
+        transition: all 0.3s ease-in-out;
+        
+        z-index: 2;
+    }
+
+        #level-info-container::-webkit-scrollbar {
+            display: none;
+            width: 0;
+        }
+
+        #button-close-level-info {
+            position: absolute;
+
+            right: 0%;
+            top: 0%;
+
+            border-radius: 100%;
+
+            font-size: 1.5rem;
+            font-weight: bolder;
+            color: white;
+            border: none;
+
+			height: 40px;
+			width: 40px;            
+
+			z-index: 3;
+			
+            background-color: #181a1c;
+        }
+
+        #level-info-container > h1 {
+            background-color: darkgray;
+
+            border-radius: 20px;
+
+            padding: 5px 10px;
+            
+            font-weight: bold;
+        }
+    
+    	#level-info-container ul {
+    		padding: 0;
+    	}
+
+            #level-info-container li {
+                list-style: none;
+                
+                text-align: left;
+                
+                border-width: 1px;
+                border-style: solid;
+                                
+                border-radius: 20px;
+
+                padding: 10px 15px;
+                
+                margin-bottom: 10px;
+            }
+            
+            #level-info-container li:last-child {
+            	margin-bottom: 0;
+            }
+
+                .level-info-item-header {
+                    display: flex;
+                }
+                    .level-info-item-header span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        font-weight: bold;
+
+                        color: white;
+
+                        font-size: 1rem;
+
+                        padding: 5px 15px;
+
+                        background-color: red;
+
+                        border-radius: 5px;
+                        
+                        margin-right: 10px;
+                    }

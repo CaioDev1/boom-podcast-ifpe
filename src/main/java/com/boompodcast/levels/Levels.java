@@ -11,6 +11,7 @@ public class Levels {
 	private Integer id;
 	private String color;
 	private String description;
+	private String requirements;
 	
 	public int getId() {
 		return id;
@@ -30,9 +31,16 @@ public class Levels {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getRequirements() {
+		return requirements;
+	}
+	public void setRequirements(String requirements) {
+		this.requirements = requirements;
+	}
 	
 	@Override
 	public String toString() {
-		return "Levels [id=" + id + ", color=" + color + ", description=" + description + "]";
+		return "Levels [id=" + id + ", color=" + color + ", description=" + description + ", requirements="
+				+ requirements + "]";
 	}
 }

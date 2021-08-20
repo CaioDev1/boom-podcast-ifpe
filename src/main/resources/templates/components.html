@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="www.thymeleaf.org"&gt;>
+<html lang="pt-BR" xmlns:th="www.thymeleaf.org">
 <!-- COMPONENTE HEAD DA PÁGINA  -->
 <head th:fragment="head(page, meta)">
     <meta th:replace="${meta}" charset="UTF-8">
@@ -172,6 +172,20 @@
          	<h1 th:text="${user.name}"></h1>
              <h1 th:text="${user.email}"></h1>
              <span th:style="${'background-color:' + user.level.color + ';'}" th:text="${user.level.description}"></span>
+             <button class="btn btn-md btn-outline-warning button-level-info">Sobre os níveis</button>
+         </div>
+         <div id="level-info-container">
+             <button id="button-close-level-info">X</button>
+             <h1>Níveis da plataforma</h1>
+             <ul>
+                 <li th:each="l : ${levels}" th:style="${'border-color: ' + l.color}">
+                     <div class="level-info-item-header">
+                         <span th:text="${l.id}" th:style="${'background-color: ' + l.color}"></span>
+                         <h3 class="my-0" th:text="${l.description}"></h3>
+                     </div>
+                     <p class="my-0" th:text="${l.requirements}"></p>
+                 </li>
+             </ul>
          </div>
      </div>
      
@@ -236,6 +250,15 @@
             <script src="/toast/jquery.toast.js"></script>
             <!-- fetch level verification -->
             <script src="/levelVerification.js"></script>
+            <script>
+                $('.button-level-info').click(e => {
+                    $('#level-info-container').css({display: 'initial'})
+                })
+
+                $('#button-close-level-info').click(e => {
+                    $('#level-info-container').css({display: 'none'})
+                })
+            </script>
         </th:block>
     </th:block>
 </body>

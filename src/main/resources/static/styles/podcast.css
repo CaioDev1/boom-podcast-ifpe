@@ -45,17 +45,17 @@ main {
         display: flex;
     }
 
-        #podcast-field button {
-            display: flex;
-
-            background: transparent;
-
-            border: none;
-        }
-
         #podcast-episodes {
             width: 50%;
         }
+        
+        	#podcast-episodes button {
+            	display: flex;
+
+            	background: transparent;
+
+            	border: none;
+        	}
         
         #podcast-episodes-list, .episode-body {
             width: 100%;
