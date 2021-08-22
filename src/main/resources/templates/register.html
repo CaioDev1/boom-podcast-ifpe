@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="www.thymeleaf.org"&gt;>
+<html lang="pt-BR" xmlns:th="www.thymeleaf.org">
 <head th:replace="components :: head(${page}, ~{::meta})">
   <meta charset="UTF-8">
 </head>
@@ -11,8 +11,8 @@
         <input type="text" name="name" id="name" class="form-control" placeholder="Insira o nome" required>
       </div>
       <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
+        <label for="email" th:text="${message != null ? message : 'E-mail'}" th:classappend="${message != null ? 'text-danger' : ''}"></label>
+        <input type="email" name="email" id="email" th:classappend="${message != null ? 'is-invalid' : ''}" class="form-control" placeholder="email@exemplo.com" required>
       </div>
       <div class="form-group mb-4">
         <label for="password">Senha</label>

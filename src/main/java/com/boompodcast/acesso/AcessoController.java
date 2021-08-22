@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,9 @@ public class AcessoController {
 	private ReactionsDao reactionsDao;
 	@Autowired
 	private LevelsDao levelsDao;
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	private List<Categories> categoriesList;
 	private List<Levels> levelsList;
 	
@@ -141,13 +145,20 @@ public class AcessoController {
 	@PostMapping("/login")
 	public String efetuarLogin(String email, String password, HttpSession session, RedirectAttributes ra) {
 		// Buscar se existe um usuario com o login e senha informados
-		Users usuarioLogado = this.usuarioDAO.findByEmailAndPassword(email, password);
+		Users user = this.usuarioDAO.findByEmail(email);
 		
-		if (usuarioLogado == null) {
-			ra.addFlashAttribute("mensagem", "Login/senha inválidos");
+		if (user == null) {
+			ra.addFlashAttribute("message_email", "Usuário não encontrado");
+			return "redirect:/login";
+		}
+		
+		boolean validPassword = encoder.matches(password, user.getPassword());
+		
+		if(!validPassword) {
+			ra.addFlashAttribute("message_password", "Senha inválida");
 			return "redirect:/login";
 		} else {
-			session.setAttribute("usuarioLogado", usuarioLogado);
+			session.setAttribute("usuarioLogado", user);
 			return "redirect:/adm/home";
 		}
 	}
@@ -155,10 +166,10 @@ public class AcessoController {
 	@GetMapping("/sair")
 	public String sair(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		
+		return "redirect:/login";
 	}
 	
-	// trocar para um redirect para o pag de login quando o acesso for negado
 	@GetMapping("/acessoNegado")
 	public String acessoNegado() {
 		return "redirect:/login";
