@@ -51,8 +51,8 @@ public class FirebaseController {
         String encodedFilePath = URLEncoder.encode(file_path, StandardCharsets.UTF_8);
         String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
         
-        return String.format("https://firebasestorage.googleapis.com/v0/b/"+bucket_name+"/o/%s?alt=media&token=%s", 
-        	encodedFilePath, encodedFileName);
+        return String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media&token=%s", 
+        	bucket_name, file_path, fileName);
     }
 
     private static File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
