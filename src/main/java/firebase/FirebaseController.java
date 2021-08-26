@@ -48,9 +48,6 @@ public class FirebaseController {
         
         file.delete();
         
-        String encodedFilePath = URLEncoder.encode(file_path, StandardCharsets.UTF_8);
-        String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
-        
         return String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media&token=%s", 
         	bucket_name, file_path, fileName);
     }
