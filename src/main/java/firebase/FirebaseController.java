@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -49,8 +48,11 @@ public class FirebaseController {
         
         file.delete();
         
+        String encodedFilePath = URLEncoder.encode(file_path, StandardCharsets.UTF_8);
+        String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
+        
         return String.format("https://firebasestorage.googleapis.com/v0/b/"+bucket_name+"/o/%s?alt=media&token=%s", 
-        	URLEncoder.encode(file_path, StandardCharsets.UTF_8), URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        	encodedFilePath, encodedFileName);
     }
 
     private static File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
@@ -62,8 +64,4 @@ public class FirebaseController {
         }
         return tempFile;
     }
-
-    /*private static String getExtension(String fileName) {
-        return fileName.substring(fileName.lastIndexOf("."));
-    }*/
 }
