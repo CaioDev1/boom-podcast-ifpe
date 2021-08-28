@@ -58,7 +58,7 @@ public class FirebaseController {
         file.delete();
         
         return String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media&token=%s", 
-        	bucket_name, URLEncoder.encode(file_path, StandardCharsets.UTF_8), URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        	bucket_name, URLEncoder.encode(file_path, StandardCharsets.UTF_8.toString()), URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString()));
     }
 
     private static File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
