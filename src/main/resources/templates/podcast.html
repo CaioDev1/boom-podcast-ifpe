@@ -31,7 +31,7 @@
         </div>
       </main>
 
-      <th:block th:replace="components :: player"></th:block>
+      <th:block th:replace="components :: player(${podcast.cover})"></th:block>
   	  <th:block th:replace="components :: scripts(${page})"></th:block>
       <script>
           $(document).ready(() => {

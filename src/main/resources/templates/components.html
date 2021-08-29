@@ -212,8 +212,8 @@
 
 
 	<!-- COMPONENTE DO PLAYER DA PÁGINA -->
-	<div th:fragment="player" id="player-container">
-       <img src="https://yt3.ggpht.com/ytc/AAUvwnjs2A34JZ0bd5aHW1aAikt1IkHaj6mqO_sQ_MPOdQ=s900-c-k-c0x00ffffff-no-rj" alt="" id='player-cover'>
+	<div th:fragment="player(cover)" id="player-container">
+       <img th:src="${cover}" id='player-cover'>
 
        <div id="player-controller">
            <audio src="" preload="auto"></audio>
