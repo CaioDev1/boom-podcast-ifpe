@@ -56,11 +56,11 @@
 <!-- ABOUT THE PROJECT -->
 <h2 id="sobre-o-projeto">💡 Sobre o projeto</h2>
 
-[![Product Name Screen Shot][product-screenshot]](https://mindzone.herokuapp.com/)
+[![Product Name Screen Shot][product-screenshot]](http://boompodcasts.herokuapp.com)
 
 O Boom Podcasts é uma plataforma de áudio onde usuários podem se sentir livres para consumir seus conteúdos de interesse e sinta-se incentivado a postar seus projetos e compartilha-los com outros usuários, podendo esses usuários também filtrar seus podcasts desejados, dar feedbacks dos episódios publicados e usufuir de um sistema "gameficado" e ranqueado por níveis, baseado no seu desempenho na plataforma como produtor e consumidor.
 
-[![Product Name Screen Shot2][product-screenshot2]](https://mindzone.herokuapp.com/)
+[![Product Name Screen Shot2][product-screenshot2]](http://boompodcasts.herokuapp.com)
 
 * Plataforma gameficada
 * Poste e consuma conteúdos
@@ -68,7 +68,7 @@ O Boom Podcasts é uma plataforma de áudio onde usuários podem se sentir livre
 * Filtre podcasts por categorias
 * Compare seu desempenho com outros usuários
 
-[![Product Name Screen Shot3][product-screenshot3]](https://mindzone.herokuapp.com/)
+[![Product Name Screen Shot3][product-screenshot3]](http://boompodcasts.herokuapp.com)
 
 <h3 id="feito-utilizando">🔧 Feito Utilizando</h3>
 
@@ -125,8 +125,8 @@ Para isso, siga os seguintes passos:
 
 Segue abaixo links de outros documentos relacionados a aplicação:
 
-_[Diagrama Entidade/Relacionamento](https://lucid.app/documents/view/f397d79a-0486-4df0-8df3-5623fae9ec6e)_
-_[Fluxograma básico](https://lucid.app/lucidchart/e2bc8b9e-474e-4e62-8cd1-a6a5283570b6/view)_
+* _[Diagrama Entidade/Relacionamento](https://lucid.app/documents/view/f397d79a-0486-4df0-8df3-5623fae9ec6e)_
+* _[Fluxograma básico](https://lucid.app/lucidchart/e2bc8b9e-474e-4e62-8cd1-a6a5283570b6/view)_
 
 
 <!-- LICENSE -->
@@ -160,6 +160,6 @@ Link do projeto: [https://github.com/CaioDev1/boom-podcast-ifpe](https://github.
 [license-url]: https://github.com/CaioDev1/boom-podcast-ifpe/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/FALTA-COLOCAR
-[product-screenshot]: public/mindzone-gif1.gif
-[product-screenshot2]: public/mindzone-gif2.gif
-[product-screenshot3]: public/mindzone-gif3.gif
+[product-screenshot]: src/main/resources/static/boompodcasts-gif1.gif
+[product-screenshot2]: src/main/resources/static/boompodcasts-gif2.gif
+[product-screenshot3]: src/main/resources/static/boompodcasts-img1.jpeg
