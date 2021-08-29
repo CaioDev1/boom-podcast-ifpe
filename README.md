@@ -16,7 +16,7 @@
   <h3 align="center">Boom Podcasts</h3>
 
   <p align="center">
-    Compartilhe suas ideias, acompanhe pensamentos de outros usuários, converse com seus amigos, curta, comente e socialize entre a comunidade de Mindzoners! 
+    Uma plataforma de podcasts e conteúdos de áudio desenvolvido com Java e Spring Boot em seu coração.
     <br />
     <a href="http://boompodcasts.herokuapp.com"><strong>Abrir app »</strong></a>
     <br />
@@ -45,7 +45,7 @@
         <li><a href="#instalação">Instalação</a></li>
       </ul>
     </li>
-    <li><a href="#mais-informações">API</a></li>
+    <li><a href="#mais-informações">Mais Informações</a></li>
     <li><a href="#licença">Licença</a></li>
     <li><a href="#contato">Contato</a></li>
   </ol>
@@ -58,39 +58,39 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://mindzone.herokuapp.com/)
 
-O Mindzone é uma rede social focada na interação e troca de ideias entre os usuários, fomentando a criatividade, diferentes pontos de vista e complementos, na plataforma, você é capaz de adicionar outros usuários como amigos, acompanhar as principais postagens, conversar com outros usuários em chat e muito mais. Opine, contribua e agregue conosco!
+O Boom Podcasts é uma plataforma de áudio onde usuários podem se sentir livres para consumir seus conteúdos de interesse e sinta-se incentivado a postar seus projetos e compartilha-los com outros usuários, podendo esses usuários também filtrar seus podcasts desejados, dar feedbacks dos episódios publicados e usufuir de um sistema "gameficado" e ranqueado por níveis, baseado no seu desempenho na plataforma como produtor e consumidor.
 
 [![Product Name Screen Shot2][product-screenshot2]](https://mindzone.herokuapp.com/)
 
-* Acompanhe as publicações de outros usuários
-* Curta e comente as postagens
-* Adicione amigos
-* Crie chat's exclusivos com outros usuários
-* Veja as postagens em alta na plataforma
-* Filtre usuários
+* Plataforma gameficada
+* Poste e consuma conteúdos
+* Navegue entre os conteúdos em alta
+* Filtre podcasts por categorias
+* Compare seu desempenho com outros usuários
 
 [![Product Name Screen Shot3][product-screenshot3]](https://mindzone.herokuapp.com/)
 
 <h3 id="feito-utilizando">🔧 Feito Utilizando</h3>
 
-Para uma maior fluídez da aplicação na parte do frontend, foi utilizado ReactJS. No lado da API da aplicação, onde fica toda a regra de negócio e autenticação,
-foi utilizado NodeJS com Express. No banco de dados, modelo não relacional com MongoDB.
+Para o funcionamento da aplicação, foi utilizado a linguagem Java acompanhado do Spring Boot para implementação do servidor, JPA com Hibernate para manipulação do banco de dados relacional MySQL somado ao AWS RDS na nuvem. Como template engine, Thymeleaf, já na segurança, foi utilizando o BCrypt para hashing de dados sensíveis e interceptadores do Spring Boot para uso de sessões.
 
-Firebase Storage para a manipulação de arquivos na nuvem e Web Socket's para funcionalidades da aplicação em tempo real.
+Firebase Storage para a manipulação de arquivos brutos da aplicação através de um bucket na nuvem.
 
 Segue a lista de ferramentas:
-* [ReactJS](https://pt-br.reactjs.org/)
-* [NodeJS](https://nodejs.org/en/)
-* [Express](https://expressjs.com/pt-br/)
-* [MongoDB](https://www.mongodb.com/)
+* [Spring Boot](https://spring.io/)
+* [Thymeleaf](https://www.thymeleaf.org/)
+* [Hibernate](https://hibernate.org/)
+* [AWS RDS](https://aws.amazon.com/pt/rds/)
 * [Firebase](https://www.firebase.com/)
-* [Socket.IO](https://socket.io/)
+* [BCrypt](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security)
+* [Bootstrap](https://getbootstrap.com/)
+* [JQuery](https://jquery.com/)
 
 
 <!-- GETTING STARTED -->
 <h2 id="Iniciando">📖 Iniciando</h2>
 
-Para inicialização correta da aplicação, primeiro é necessário que o NodeJS e o gerenciador de pacotes NPM esteja instalado e atualizado.
+Para inicialização correta da aplicação, primeiro é necessário que o todos os software necessários para execução do Java como JVM, JRE e uma IDE Java estejam devidamente instalados e atualizados.
 
 Para isso, siga os seguintes passos:
 
@@ -100,26 +100,33 @@ Para isso, siga os seguintes passos:
    ```sh
    git clone https://github.com/CaioDev1/boom-podcast-ifpe.git
    ```
-2. Instale os pacotes e dependências via NPM
-   ```sh
-   npm install
+2. Crie um arquivo `application.properties` na pasta `resources/` do projeto, e preencha com todos os dados e chaves necessárias para a inicialização da aplicação.
    ```
-3. Crie um arquivo `.env` na raiz do projeto com todos os dados sensíveis da aplicação.
+    spring.datasource.url =${AWS_HOST}
+    spring.datasource.username =${AWS_USER}
+    spring.datasource.password = ${AWS_PASSWORD}
+
+    spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+    spring.jpa.hibernate.ddl-auto = update
+
+    spring.jpa.show-sql=true
+    spring.jpa.properties.hibernate.format_sql=true
+
+    spring.servlet.multipart.max-file-size=200MB
+    spring.servlet.multipart.max-request-size=200MB
+
+    firebase.adminsdk=${FIREBASE_ADMIN_SDK}  /* JSON com os dados e chaves necessárias para conexão com o bucket storage do firebase */
    ```
-    ATRIBUTO=VALOR
-    ATRIBUTO=VALOR
-    
-    ...
-   ```
+3. Certifique-se que o banco de dados MySQL está executando na sua máquina e inicie a aplicação Spring Boot na IDE desejada.
 
 
 <!-- USAGE EXAMPLES -->
-<h2 id="mais-informações">ℹ API</h2>
+<h2 id="mais-informações">ℹ Mais Informações</h2>
 
-Além da parte do frontend da aplicação, temos a API que gerencia as requisições e trata todo o esquema e segurança da aplicação,
-para acessa-la, basta ir para o link do repositório abaixo: 
+Segue abaixo links de outros documentos relacionados a aplicação:
 
-_[Mindzone NodeJS API](https://github.com/CaioDev1/socialmedia-backend)_
+_[Diagrama Entidade/Relacionamento](https://lucid.app/documents/view/f397d79a-0486-4df0-8df3-5623fae9ec6e)_
+_[Fluxograma básico](https://lucid.app/lucidchart/e2bc8b9e-474e-4e62-8cd1-a6a5283570b6/view)_
 
 
 <!-- LICENSE -->
