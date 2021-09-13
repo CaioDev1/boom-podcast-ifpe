@@ -159,7 +159,7 @@ Link do projeto: [https://github.com/CaioDev1/boom-podcast-ifpe](https://github.
 [license-shield]: https://img.shields.io/github/license/CaioDev1/boom-podcast-ifpe.svg?style=for-the-badge
 [license-url]: https://github.com/CaioDev1/boom-podcast-ifpe/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/caio-cardoso-158133196
+[linkedin-url]: https://www.linkedin.com/in/caiodev1/
 [product-screenshot]: src/main/resources/static/boompodcasts-gif1.gif
 [product-screenshot2]: src/main/resources/static/boompodcasts-gif2.gif
 [product-screenshot3]: src/main/resources/static/boompodcasts-img1.jpeg
